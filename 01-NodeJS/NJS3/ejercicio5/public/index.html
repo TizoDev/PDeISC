@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>Index</title>
+        <style>
+            body
+            {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body id="body">
+        <div>
+            <button onclick="generar(0)">Titulo</button>
+            <button onclick="generar(1)">Subtitulo</button>
+            <button onclick="generar(2)">Parrafo</button>
+            <button onclick="generar(3)">Imagen</button>
+            <button onclick="generar(4)">Enlace</button>
+        </div>
+        <script>
+            function generar(n)
+            {
+                switch(n)
+                {
+                    case 0:
+                        document.getElementById('body').innerHTML+='<h1> Titulo </h1>'
+                        break;
+                    case 1:
+                        document.getElementById('body').innerHTML+='<h3> Subtitulo </h3>'
+                        break;
+                    case 2:
+                        document.getElementById('body').innerHTML+='<p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem enim a, perspiciatis nemo dolorum aliquid saepe tempora dolor ab harum, qui deleniti porro architecto, totam dolorem. Temporibus tempora perferendis accusamus! </p>'
+                        break;
+                    case 3:
+                        document.getElementById('body').innerHTML+='<img src="queso.jpg" alt="queso" height="200px">'
+                        break;
+                    case 4:
+                        document.getElementById('body').innerHTML+='<p><a href="/"> Enlace </a></p>'
+                        break;
+                }
+            }
+        </script>
+    </body>
+</html>
