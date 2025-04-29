@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>Evento Wheel</title>
+        <style>
+            body
+            {
+                text-align: center;
+                user-select: none;
+            }
+            /*
+                La barra de carga se inicia en 0% por el css
+            */
+            #bar 
+            {
+                background-color: blue;
+                width: 0%;
+            }
+        </style>
+    </head>
+    <body id="body">
+        <h1>Usar la Rueda del Mouse</h1>
+        <h2><a href="/" id="vinculo">Volver</a></h2>
+        <div id="bar">.</div>
+        <h4 id="porcentaje"></h4>
+        <script>
+            //Se le agrega el evento de "Wheel" que detectara cuando se use la rueda de desplazamiento
+            //Y se le asigna al funcion de cargar
+            document.getElementById('body').addEventListener('wheel', cargar);
+            let n = 0;
+            function cargar(event)
+            {
+                //Se modifica un numero que varia desde el 0 al 100 dependiendo de
+                //Si la rueda se desplaza hacia abajo
+                if(event.deltaY > 0) 
+                {
+                    if(n > 0)n--;
+                } 
+                //o si se desplaza hacia arriba
+                else if(event.deltaY < 0) 
+                {
+                    if(n < 100) n++;
+                }
+                document.getElementById('bar').style.width = '' + n + '%';
+                //Luego se le asigna la anchura de la barra dependiendo del numero
+                //Si el numero es igual a 100 se mostrara carga completada, y si no el porcentaje
+                if(n == 100)
+                {
+                    document.getElementById('porcentaje').innerHTML = 'Carga Completada';
+                }
+                else
+                {
+                    document.getElementById('porcentaje').innerHTML = n + '%';
+                }
+            }
+        </script>
+    </body>
+</html>

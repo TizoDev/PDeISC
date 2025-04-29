@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>Evento Input</title>
+        <style>
+            body
+            {
+                text-align: center;
+                user-select: none;
+            }
+        </style>
+    </head>
+    <body id="body">
+        <h1>Input</h1>
+        <h2><a href="/" id="vinculo">Volver</a></h2>
+        <form id="formulario"> <!--Formulario simple con 1 solo input-->
+            <label><input type="text" id="input"/></label>
+        </form>
+        <h4 id="texto"></h4>
+        <script>
+            document.getElementById('input').addEventListener('input', modificar);
+            //Se obtiene el elemto con ID input y se le asigna el evento de mismo nombre, con la funcion modificar
+            function modificar(event)
+            {
+                document.getElementById('texto').innerHTML = event.target.value
+                //Modifica en tiempo real el html interno del elemento con id texto para que sea
+                //igual a lo que este en el input
+            }
+        </script>
+    </body>
+</html>

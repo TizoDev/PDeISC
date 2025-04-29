@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>Evento Mouse</title>
+        <style>
+            body 
+            {
+                text-align: center;
+                user-select: none;
+            }
+            #caja 
+            {
+                /* Codigo para que la caja pueda moverse libremente */
+                width: 50px;
+                height: 50px;
+                background-color: red;
+                position: absolute;
+                pointer-events: none;
+                transform: translate(-50%, -50%);
+                z-index: -10;
+            }
+        </style>
+    </head>
+    <body id="body">
+        <h1>Mover Mouse</h1>
+        <h2><a href="/" id="vinculo">Volver</a></h2>
+        <div id="caja"></div>
+        <script>
+            //Variable que hace referencia al objeto con id caja
+            const caja = document.getElementById('caja');
+            //Se le agrega al documento el evento que detecta cuando se mueve el mouse, y se le asigna una funcion
+            document.addEventListener('mousemove', seguirMouse);
+            
+            function seguirMouse(event) 
+            {
+                //Se modifica la posicion de la caja para que siga al mouse
+                caja.style.left = event.clientX + 'px';
+                caja.style.top = event.clientY + 'px';
+            }
+        </script>
+    </body>
+</html>

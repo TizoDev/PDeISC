@@ -2,6 +2,9 @@
     <head>
         <title>Index</title>
         <style>
+            /*
+            CSS basico para centrar todo y darle un mejor tamaño a los botones de las funciones
+            */
             body
             {
                 text-align: center;
@@ -20,10 +23,15 @@
     </head>
     <body id="body">
         <h1>Index</h1>
+        <!--
+            Se crean 3 botones, uno llama a la funcion anterior para cambiar entre funciones
+            mientras que otro llama a la funcion siguiente
+            el boton del medio va a ir cambiando de funcion, arrancando en agregarH1
+        -->
         <button onclick="anterior()">Anterior</button>
         <button id="botonFuncion" onclick="agregarH1()">Agregar Titulo</button>
         <button onclick="siguiente()">Siguiente</button>
-        
+        <div id="imagenes"></div>
         <script src="funcionalidad.js"></script>
     </body>
 </html>

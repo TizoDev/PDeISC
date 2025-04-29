@@ -1,0 +1,160 @@
+<html>
+    <head>
+        <title>Evento Tecla</title>
+        <style>
+            body
+            {
+                text-align: center;
+                user-select: none;
+                color: white;
+                background-color: black;
+            }
+            body a
+            {
+                color: white;
+            }
+            canvas
+            {
+                width: 400px;
+                height: 400px;
+                image-rendering: pixelated;/*Para evitar que la imagen se difumine*/
+            }
+        </style>
+    </head>
+    <body id="body">
+        <h1>Presiona las Flechas de Izquierda o Derecha</h1>
+        <h2><a href="/" id="vinculo">Volver</a></h2>
+        <canvas id="canvas" width="100" height="100"></canvas> <!-- Se crea un canvas para mostrar la animacion-->
+        <script>
+            //Script para el manejo del Canva
+            //Se crea una variable haciendo referencia al canvas y a su entorno  2D
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.imageSmoothingEnabled = false;
+            ctx.imageSmoothingQuality = 'low';
+
+            //Se crea un sprite utilizando el spritesheet de 'planeta.png'
+            const sprite = new Image();
+            sprite.src = 'planeta.png';
+
+            const frameWidth = 100;  // Ancho de un frame
+            const frameHeight = 100; // Alto de un frame
+            const totalFrames = 163;  // Total de frames
+            let currentFrame = 0;
+
+            let fps = 10; // Frames por segundo
+            let frameDuration = 1000 / fps; // Tiempo entre frames (ms)
+            let velocidadAvance = 1; //Velocidad a la que saltea frames
+
+            sprite.onload = function() {
+                requestAnimationFrame(animar);
+            };
+
+            let lastTime = 0;
+            function animar(timestamp) 
+            {
+                /*
+                    Se anima y se dibuja el canvas siguiendo una velocidad determinada por los fps
+                    tambien luego de cierto punto se saltea algunos frames para generar el efecto
+                    de velocidad
+                */
+                if (!lastTime) lastTime = timestamp;
+                const delta = timestamp - lastTime;
+
+                if (delta > frameDuration) 
+                {
+                    currentFrame = (currentFrame + velocidadAvance) % totalFrames;
+                    lastTime = timestamp;
+                }
+
+                //Borra el canva y lo redibuja
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                ctx.drawImage(
+                    sprite,
+                    currentFrame * frameWidth, 0,
+                    frameWidth, frameHeight,
+                    0, 0,
+                    frameWidth, frameHeight
+                );
+
+                requestAnimationFrame(animar);
+            }
+
+            // Funciones para cambiar la velocidad
+            function acelerar() 
+            {
+                //Maximo de 60fps, y luego de llegar a ese maximo se saltea un frame cada que se llame a la funcion
+                //con un maximo de 100 frames salteados
+                fps = Math.min(60, fps + 10);
+                frameDuration = 1000 / fps;
+                if(fps > 59) velocidadAvance = Math.min(100, velocidadAvance + 1);
+            }
+
+            function frenar() 
+            {
+                //Comienza a retroceder de la misma manera que la funcion avanzar
+                //Con un minimo de 10 frames por segundo
+                velocidadAvance = Math.max(1, velocidadAvance - 1);
+
+                if(velocidadAvance == 1)
+                {
+                    fps = Math.max(10, fps - 10);
+                    frameDuration = 1000 / fps;
+                }
+            }
+           
+        </script>
+        <script>
+            //Script para el manejo de los eventos
+            //Se le asigna al body 2 eventos, uno para apretar una tecla y otro para soltarla
+            //Con sus funciones correspondientes
+            document.getElementById('body').addEventListener('keydown', teclaPresionada);
+            document.getElementById('body').addEventListener('keyup', teclaSoltada);
+
+            //Se crean 2 variables booleanas para determinar si esta avanzando o retrocediendo
+            let retrocediendo = false;
+            let avanzando = false;
+
+            //Determina que direccion se esta apretando
+            function teclaPresionada(event)
+            {
+                if(event.keyCode === 37) //Flecha Izquierda
+                {
+                    retrocediendo = true;
+                }
+                else if(event.keyCode === 39 ) //Flecha Derecha
+                {
+                    avanzando = true;
+                }
+            }
+            //Determina si se solto alguna tecla
+            function teclaSoltada(event)
+            {
+                if(event.keyCode === 37)
+                {
+                    retrocediendo = false;
+                }
+                if(event.keyCode === 39 )
+                {
+                    avanzando = false;
+                }
+            }
+
+            //Llama a la funcion avanzar y retroceder del otro script, dependiendo que boton esta apretado
+            function avanzarRetroceder() 
+            {
+                if(avanzando == true)
+                {
+                    acelerar();
+                }
+                if(retrocediendo == true)
+                {
+                    frenar();
+                }
+            }
+            //Se llama a la funcion de arriba cada medio segundo para que se puede acelerar al mantener la tecla
+            let intervalo = setInterval(avanzarRetroceder, 500);
+        </script>
+    </body>
+</html>

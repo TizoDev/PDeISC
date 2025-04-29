@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <title>index</title>
+        <style>
+            #caja 
+            {
+                /* Codigo para que la caja pueda moverse libremente */
+                background-color: rgb(255, 219, 120);
+                position: absolute;
+                pointer-events: none;
+                transform: translate(-50%, -50%);
+                z-index: -10;
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="caja"></div>
+        <div id="contenedor-principal">
+            <header>
+                <h1>HTML de Ejemplo</h1>
+                <nav>
+                    <ul>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Servicios</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <main>
+                <section>
+                    <h2>Sección 1</h2>
+                    <p>Este es un párrafo dentro de la sección 1.</p>
+                    <p>Otro párrafo.</p>
+                </section>
+                
+                <section>
+                    <h2>Sección 2</h2>
+                    <article>
+                        <h3>Artículo 1</h3>
+                        <p>Contenido del artículo 1.</p>
+                    </article>
+                    <article>
+                        <h3>Artículo 2</h3>
+                        <p>Contenido del artículo 2.</p>
+                    </article>
+                </section>
+            </main>
+    
+            <footer>
+                <p>Derechos reservados © 2025</p>
+            </footer>
+        </div>
+        <script>
+            document.addEventListener('mousedown', contarHijos);
+            document.addEventListener('mouseup', esconder);
+
+            function contarHijos(event)
+            {
+                let elemento = event.target;
+                caja.innerHTML = '<p>' + elemento + '</p><p> Hijos:' + elemento.childElementCount + '</p>';
+                caja.style.display = 'block';
+            }
+
+            function esconder(event)
+            {
+                caja.style.display = 'none';
+            }
+        </script>
+        <script>
+            //Script para el movimiento de la caja
+            //Variable que hace referencia al objeto con id caja
+            const caja = document.getElementById('caja');
+            //Se le agrega al documento el evento que detecta cuando se mueve el mouse, y se le asigna una funcion
+            document.addEventListener('mousemove', seguirMouse);
+            
+            function seguirMouse(event) 
+            {
+                //Se modifica la posicion de la caja para que siga al mouse
+                caja.style.left = event.clientX + 'px';
+                caja.style.top = event.clientY + 'px';
+            }
+        </script>
+    </body>
+</html>
