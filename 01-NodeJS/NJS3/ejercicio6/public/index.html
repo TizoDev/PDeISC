@@ -5,6 +5,36 @@
             body
             {
                 text-align:center;
+                background-color: blue;
+                overflow: hidden;
+            }
+            .container
+            {
+                background-color: rgba(255, 255, 255, 0.2);
+                width: 50%;
+                height: 100%;
+                margin: 0 auto;
+            }
+            form
+            {
+                margin: 0 auto;
+                width: 400px;
+                padding: 10px;
+                border: 1px solid black;
+            }
+            input
+            {
+                min-width: 50px;
+            }
+            label
+            {
+                padding-right: 5px;
+                width:200px;
+            }
+            .inputTexto
+            {
+                text-align: right;
+                margin:0 80;
             }
             #discapacidades
             {
@@ -13,47 +43,52 @@
         </style>
     </head>
     <body>
-        <div>
-            <h2>Formulario</h2>
-            <form action="">
-                <label for="">Nombre: </label><input type="text">
-                <br>
-                <label for="">Apellido: </label><input type="text">
-                <br>
-                <label for="">Email: </label><input type="email">
-                <br>
-                <label for="">Edad: </label><input type="number">
+        <div class="container">
+            <h2 style="text-align: center;">Formulario</h2>
+            <form action="" id="formulario">
+                <div class="inputTexto">
+                    <label for="">Nombre: </label><input type="text" id="nombreInput">
+                    <br>
+                    <label for="">Apellido: </label><input type="text" id="apellidoInput">
+                    <br>
+                    <label for="">Email: </label><input type="email" id="emailInput">
+                    <br>
+                    <label for="">Edad: </label><input type="number" id="edadInput">
+                </div>
                 <br>
                 <label for="">Sexo: </label>
-                <label for="">Masculino</label><input type="radio" name="sexo">
-                <label for="">Femenino</label><input type="radio" name="sexo">
-                <label for="">Otro</label><input type="radio" name="sexo" checked>
+                <label for="">Masculino</label><input type="radio" name="sex" value="Masculino">
+                <label for="">Femenino</label><input type="radio" name="sex" value="Femenino">
+                <label for="">Otro</label><input type="radio" name="sex" checked value="Otro">
                 <br>
                 <label for="">Estado Civil: </label>
-                <select name="" id="">
-                    <option value="0">Soltero/a</option>
-                    <option value="1">Casado/a</option>
-                    <option value="2">Divorciado/a</option>
-                    <option value="3">Viudo/a</option>
+                <select name="" id="estadoInput">
+                    <option value="Soltero/a">Soltero/a</option>
+                    <option value="Casado/a">Casado/a</option>
+                    <option value="Divorciado/a">Divorciado/a</option>
+                    <option value="Viudo/a">Viudo/a</option>
                 </select>
                 <br>
                 <label for="">Discapacidad: </label><input type="checkbox" id="discheck">
                 <br>
                 <div id="discapacidades">
-                    <label for="">Visual: </label><input type="checkbox">
+                    <label for="">Visual: </label><input type="checkbox" id="discheck1">
                     <br>
-                    <label for="">Auditiva: </label><input type="checkbox">
+                    <label for="">Auditiva: </label><input type="checkbox" id="discheck2">
                     <br>
-                    <label for="">Motriz: </label><input type="checkbox">
+                    <label for="">Motriz: </label><input type="checkbox" id="discheck3">
                     <br>
-                    <label for="">Intelectual: </label><input type="checkbox">
+                    <label for="">Intelectual: </label><input type="checkbox" id="discheck4">
                     <br>
-                    <label for="">Psicosocial: </label><input type="checkbox">
+                    <label for="">Psicosocial: </label><input type="checkbox" id="discheck5"> 
                     <br>
                 </div>
                 <br>
-                <button type="submit">Enviar</button>
+                <button type="submit" id="enviarBoton">Enviar</button>
             </form>
+            <div id="infoUsuario">
+                
+            </div>
             <script>
                 document.getElementById('discheck').addEventListener('change', mostrarDiscapacidad);
 
@@ -67,6 +102,52 @@
                     {
                         document.getElementById('discapacidades').style.display = 'block';
                     }
+                }
+
+                document.getElementById('formulario').addEventListener('submit', enviar);
+
+                function enviar(event)
+                {
+                    if(tieneNum(document.getElementById('nombreInput').value))
+                    {
+                        alert("Nombre con caracteres invalidos");
+                        return false;
+                    }
+                    if(tieneNum(document.getElementById('apellidoInput').value))
+                    {
+                        alert("Apellido con caracteres invalidos");
+                        return false;
+                    }
+
+                    let nombre = document.getElementById('nombreInput').value;
+                    let apellido = document.getElementById('apellidoInput').value;
+                    let email = document.getElementById('emailInput').value;
+                    let edad = document.getElementById('edadInput').value;
+                    let sexoSeleccionado = document.querySelector('input[name="sex"]:checked').value;
+                    let estadoCivilSeleccionado = document.getElementById("estadoInput").value;
+
+                    let disc = '';
+                    if(document.getElementById('discapacidades').style.display == 'block')
+                    {
+                        if(document.getElementById('discheck1').checked) disc += 'Visual, ';
+                        if(document.getElementById('discheck2').checked) disc += 'Auditiva, ';
+                        if(document.getElementById('discheck3').checked) disc += 'Motriz, ';
+                        if(document.getElementById('discheck4').checked) disc += 'Intelectual, ';
+                        if(document.getElementById('discheck5').checked) disc += 'Psicosocial, ';
+                    }
+
+                    document.getElementById('infoUsuario').innerHTML = '<h3>' + nombre + ' ' + apellido +'</h3><p>Email: ' + email + '</p><p>Edad: ' + edad + '</p><p>Sexo: '+ sexoSeleccionado +'</p><p>Estado Civil: ' + estadoCivilSeleccionado +'</p><p>Discapacidades: '+ disc +'</p>';
+
+                    event.preventDefault();
+                }
+
+                function tieneNum(s)
+                {
+                    for(let i=0; i<s.length; i++)
+                    {
+                        if(!/[a-zA-Z]/.test(s[i])) return true;
+                    }
+                    return false;
                 }
             </script>
         </div>
