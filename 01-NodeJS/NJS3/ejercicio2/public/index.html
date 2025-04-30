@@ -2,24 +2,46 @@
     <head>
         <title>Index</title>
         <style>
-            body
+            .container
             {
+                margin-top: 15%;
                 text-align: center;
             }
-            a
+            button
             {
-                margin-right: 50px;
-                margin-left: 50px;
+                width: 200px;
             }
         </style>
     </head>
     <body>
-        <h3>
-            <a href="/pag1">Pagina 1</a>
-            <a href="/pag2">Pagina 2</a>
-            <a href="/pag3">Pagina 3</a>
-            <a href="/pag4">Pagina 4</a>
-            <a href="/pag5">Pagina 5</a>
-        </h3>
+        <div class="container">
+            <button onclick="enviar('/pag1')">
+                <p>Pagina1</p>
+                <p>Click</p>
+            </button>
+            <button onclick="enviar('/pag2')">
+                <p>Pagina2</p>
+                <p>Wheel</p>
+            </button>
+            <button onclick="enviar('/pag3')">
+                <p>Pagina3</p>
+                <p>Key</p>
+            </button>
+            <button onclick="enviar('/pag4')">
+                <p>Pagina4</p>
+                <p>MouseMove</p>
+            </button>
+            <button onclick="enviar('/pag5')">
+                <p>Pagina5</p>
+                <p>Input</p>
+            </button>
+        </div>
+        <script>
+            //Al llamar a la funcion enviar se redirecciona la pagina web a un enlace enviado, como si fuera un enlace
+            function enviar(enlace)
+            {
+                window.location.href = enlace;
+            }
+        </script>
     </body>
 </html>

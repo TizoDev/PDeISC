@@ -10,11 +10,69 @@
     </head>
     <body id="body">
         <button onclick="crear()">Crear Enlace</button>
+        <button onclick="href()">Modificar href</button>
+        <button onclick="color()">Modificar Color</button>
+        <button onclick="borrar()">Borrar Enlace</button>
+        <button onclick="size()">Cambiar Tama&ntilde;o Enlace</button>
+        <div id="enlaces"></div>
+        <h4 id="cambios"></h4>
         <br>
         <script>
             function crear()
             {
-                document.getElementById('body').innerHTML += '<a class="enlace" href="/"> Enlace </a>';
+                //Agrega un enlace a wikipedia con un style basico dentro del div 'enlaces'
+                document.getElementById('enlaces').innerHTML += '<a class="enlace" href="https://es.wikipedia.org/wiki/Enlace" style="color:rgb(0,0,255); font-size: 20px"> Wikipedia </a>';
+                //Modifica el innerhtml de h4 de 'cambios' para notificar que se creo un enlace
+                document.getElementById('cambios').innerHTML = 'Enlace Creado';
+            }
+            function href()
+            {
+                /*
+                    Crea una coleccion con todos los elementos de clase enlace
+                    y le modifica el href e innerhtml al ultimo elemento de la lista
+                */
+                let coleccion = document.getElementsByClassName('enlace');
+                coleccion[coleccion.length-1].href = 'https://github.com/TizoDev';
+                coleccion[coleccion.length-1].innerHTML = ' Github ';
+                //Modifica el innerhtml de h4 de 'cambios' para notificar que se modifico un enlace
+                document.getElementById('cambios').innerHTML = 'Href del ultimo enlace modificada de Wikipedia a Github';
+            }
+            function color()
+            {
+                /*
+                    Crea una coleccion con todos los elementos de clase enlace
+                    y le modifica el color al ultimo, aparte de notificar de que color
+                    a que color se cambio
+                */ 
+                let coleccion = document.getElementsByClassName('enlace');
+                document.getElementById('cambios').innerHTML = 'Color del ultimo enlace modificado de ' + coleccion[coleccion.length-1].style.color + ' a ';
+                let r = (Math.floor(Math.random() * 255));
+                let g = (Math.floor(Math.random() * 255));
+                let b = (Math.floor(Math.random() * 255));
+                coleccion[coleccion.length-1].style.color = 'rgb(' + r +','+ g +','+ b + ')';
+                document.getElementById('cambios').innerHTML += '' + coleccion[coleccion.length-1].style.color;  
+            }
+            function borrar()
+            {
+                /*
+                    Crea una coleccion con todos los elementos de clase enlace
+                    y elimina el ultimo elemento
+                */
+                let coleccion = document.getElementsByClassName('enlace');
+                coleccion[coleccion.length-1].remove()
+                document.getElementById('cambios').innerHTML = 'Ultimo enlace eliminado';
+            }
+            function size()
+            {
+                /*
+                    Crea una coleccion con todos los elementos de clase enlace
+                    y le cambia el fontsize a uno aleatorio
+                */
+                let coleccion = document.getElementsByClassName('enlace');
+                document.getElementById('cambios').innerHTML = 'Tama&ntilde;o cambiado de ' + coleccion[coleccion.length-1].style.fontSize + ' a '
+                let s = (Math.floor(Math.random() * 50)) + 1;
+                coleccion[coleccion.length-1].style.fontSize = s;
+                document.getElementById('cambios').innerHTML += '' + coleccion[coleccion.length-1].style.fontSize;  
             }
         </script>
     </body>

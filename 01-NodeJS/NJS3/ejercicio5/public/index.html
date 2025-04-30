@@ -10,6 +10,7 @@
     </head>
     <body id="body">
         <div>
+            <!--Se crean 5 botones que llaman a la funcion generar, cada uno con un numero distinto-->
             <button onclick="generar(0)">Titulo</button>
             <button onclick="generar(1)">Subtitulo</button>
             <button onclick="generar(2)">Parrafo</button>
@@ -19,21 +20,27 @@
         <script>
             function generar(n)
             {
+                //Dependiendo del numero que se le envia por parametro va a agregar una etiqueta distinta
                 switch(n)
                 {
                     case 0:
+                        //En caso de ser 0 agrega un titulo
                         document.getElementById('body').innerHTML+='<h1> Titulo </h1>'
                         break;
                     case 1:
+                        //En caso de ser 1 agrega un subtitulo
                         document.getElementById('body').innerHTML+='<h3> Subtitulo </h3>'
                         break;
                     case 2:
+                        //En caso de ser 2 agrega un parrafo con un lorem ipsum
                         document.getElementById('body').innerHTML+='<p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem enim a, perspiciatis nemo dolorum aliquid saepe tempora dolor ab harum, qui deleniti porro architecto, totam dolorem. Temporibus tempora perferendis accusamus! </p>'
                         break;
                     case 3:
+                        //En caso de ser 3 agrega una imagen
                         document.getElementById('body').innerHTML+='<img src="queso.jpg" alt="queso" height="200px">'
                         break;
                     case 4:
+                        //En caso de ser 4 agrega un enlace
                         document.getElementById('body').innerHTML+='<p><a href="/"> Enlace </a></p>'
                         break;
                 }
