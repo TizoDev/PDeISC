@@ -53,18 +53,22 @@
             </footer>
         </div>
         <script>
+            //Se agregan los eventos para mousedown y mouseup en el documento
             document.addEventListener('mousedown', contarHijos);
             document.addEventListener('mouseup', esconder);
 
             function contarHijos(event)
             {
+                //Revisa cuantos hijos tiene el elemento al que se le dio click
                 let elemento = event.target;
+                //Lo muestra en la caja y hace visible la caja
                 caja.innerHTML = '<p>' + elemento + '</p><p> Hijos:' + elemento.childElementCount + '</p>';
                 caja.style.display = 'block';
             }
 
             function esconder(event)
             {
+                //Esconde la caja al soltar el click
                 caja.style.display = 'none';
             }
         </script>
