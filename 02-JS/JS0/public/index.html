@@ -4,58 +4,52 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <table class="tabla">
-            <td>
-                <form action="" id="registrar" class="container">
-                    <h2>Registrar Nuevo Usuario</h2>
-                    <input type="text" id="nombreInput" placeholder="Nombre">
-                    <br>
-                    <input type="text" id="apellidoInput" placeholder="Apellido">
-                    <br>
-                    <label for="">Nacimiento</label>
-                    <input type="date" id="nacimientoInput" placeholder="Fecha de Nacimiento" style="width: 165px;">
-                    <br>
-                    <label for="">Sexo: </label>
-                    <label for="">Masculino</label>
-                    <input type="radio" value="M" name="sexo" style="width: 10px;" checked>
-                    <label for="">Femenino</label>
-                    <input type="radio" value="F" name="sexo" style="width: 10px;">
-                    <br>
-                    <input type="number" id="documentoInput" placeholder="Documento">
-                    <br>
-                    <label for="">Estado Civil</label>
-                    <select name="" id="estadoInput">
-                        <option value="Soltero/a">Soltero/a</option>
-                        <option value="Casado/a">Casado/a</option>
-                        <option value="Divorciado/a">Divorciado/a</option>
-                        <option value="Viudo/a">Viudo/a</option>
-                    </select>
-                    <br>
-                    <input type="text" id="nacioInput" placeholder="Nacionalidad">
-                    <br>
-                    <input type="tel" id="telefonoInput" placeholder="Telefono, ej: 123 456 7899">
-                    <br>
-                    <label for="">Hijos?</label>
-                    <input type="checkbox" id="hijos" style="width: 10px;">
-                    <br>
-                    <div id="hijosSection">
-                        <input type="number" id="hijosInput" placeholder="Numero de Hijos">
-                        <br>
-                    </div>
-                    <input type="email" id="emailInput" placeholder="Email, ej: email123@gmail.com">
-                    <br>
-                    <button type="submit" class="registro">Registrarse</button>
-                </form>
-            </td>
-            <td>
-                <div class="container">
-                    <h2>Usuarios Registrados</h2>
-                    <div id="usuariosSection">
-                        
-                    </div>
-                </div>
-            </td>
-        </table>
+        <form action="" id="registrar" class="container">
+            <h3>Registrar Nuevo Usuario</h3>
+            <input type="text" id="nombreInput" placeholder="Nombre">
+            <br>
+            <input type="text" id="apellidoInput" placeholder="Apellido">
+            <br>
+            <label for="">Nacimiento</label>
+            <input type="date" id="nacimientoInput" placeholder="Fecha de Nacimiento" style="width: 165px;">
+            <br>
+            <label for="">Sexo: </label>
+            <label for="">Masculino</label>
+            <input type="radio" value="M" name="sexo" style="width: 10px;" checked>
+            <label for="">Femenino</label>
+            <input type="radio" value="F" name="sexo" style="width: 10px;">
+            <br>
+            <input type="number" id="documentoInput" placeholder="Documento">
+            <br>
+            <label for="">Estado Civil</label>
+            <select name="" id="estadoInput">
+                <option value="Soltero/a">Soltero/a</option>
+                <option value="Casado/a">Casado/a</option>
+                <option value="Divorciado/a">Divorciado/a</option>
+                <option value="Viudo/a">Viudo/a</option>
+            </select>
+            <br>
+            <input type="text" id="nacioInput" placeholder="Nacionalidad">
+            <br>
+            <input type="tel" id="telefonoInput" placeholder="Telefono, ej: 123 456 7899">
+            <br>
+            <label for="">Hijos?</label>
+            <input type="checkbox" id="hijos" style="width: 10px;">
+            <br>
+            <div id="hijosSection">
+                <input type="number" id="hijosInput" placeholder="Numero de Hijos">
+                <br>
+            </div>
+            <input type="email" id="emailInput" placeholder="Email, ej: email123@gmail.com">
+            <br>
+            <button type="submit" class="registro">Registrarse</button>
+        </form>
+        <div class="container">
+            <h3>Usuarios Registrados</h3>
+            <div id="usuariosSection">
+                
+            </div>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>

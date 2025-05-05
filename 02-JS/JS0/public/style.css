@@ -7,6 +7,7 @@ body
     text-align: center;
     font-size: large;
     background-color: aliceblue;
+    display:flex;
 }
 .container
 {
@@ -17,8 +18,9 @@ body
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
     border-radius: 20px;
     text-align: center;
-    width: 600px;
+    width: 40%;
     height: 550px;
+    overflow-y: scroll;
 }
 input
 {
@@ -39,10 +41,6 @@ form button
     width: 120px;
     margin-top: 10px;
     font-size:medium;
-}
-.tabla td
-{
-    width: 200vw;
 }
 #hijosSection
 {
@@ -77,4 +75,16 @@ form button
     font-weight: 600;
     padding-right: 50px;
     float: right;
+}
+
+@media (max-width: 700px)
+{
+    body
+    {
+        display: block;
+    }
+    .container
+    {
+        width: 80%;
+    }
 }
