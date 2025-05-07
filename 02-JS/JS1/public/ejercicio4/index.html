@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Ejercicio4</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <form action="" id="formNumeros">
+            <h3>Numeros</h3>
+            <p>Ingresar 1</p>
+            <input type="number" placeholder="Numero" id="numero">
+            <br><br>
+            <button type="submit">Enviar Datos</button>
+            <button type="button" onclick="eliminarNumero()"> Eliminar el Primer numero</button>
+            <p id="errorText"></p>
+            <p id="numerosText"></p>
+        </form>
+        <br>
+        <form action="" id="formMensajes">
+            <h3>Mensajes de Chat</h3>
+            <input type="text" placeholder="Mensaje de Chat" id="mensaje">
+            <br><br>
+            <button type="submit">Enviar Datos</button>
+            <button type="button" onclick="eliminarMensaje()"> Eliminar el Primer Mensaje</button>
+            <p id="chat"></p>
+        </form>
+        <br>
+        <form action="" id="formClientes">
+            <h3>Cola de Supermercado</h3>
+            <input type="text" placeholder="Nombre del Nuevo Cliente" id="cliente">
+            <br><br>
+            <button type="submit">Agregar a la Cola</button>
+            <button type="button" onclick="eliminarCliente()">Atender Cliente</button>
+            <p id="clientes"></p>
+        </form>
+
+        <script src="ejercicio4/script.js"></script>
+    </body>
+</html>

@@ -1,0 +1,14 @@
+form
+{
+    text-align: center;
+    width: 50%;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+input
+{
+    width: 95%;
+    text-align: center;
+}

@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Ejercicio2</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <form action="" id="formAnimales">
+            <h3>Animales</h3>
+            <p>Ingresar un Animal</p>
+            <input type="text" placeholder="Vaca" id="animal">
+            <br><br>
+            <button type="submit">Enviar Datos</button>
+            <button onclick="borrarAnimal()" type="button">Borrar ultimo Animal</button>
+            <p id="errorText1"></p>
+            <p id="animalesText"></p>
+        </form>
+        <br>
+        <form action="" id="formProductos">
+            <h3>Lista de Compras</h3>
+            <p>Ingresar un Producto</p>
+            <input type="text" placeholder="Leche, Queso, etc" id="producto">
+            <br><br>
+            <button type="submit">Enviar Datos</button>
+            <button onclick="borrarProductos()" type="button">Borrar ultimo Producto</button>
+            <button onclick="vaciarProductos()" type="button">Vaciar Lista</button>
+            <p id="errorText2"></p>
+            <p id="productosText"></p>
+        </form>
+
+        <script src="ejercicio2/script.js"></script>
+    </body>
+</html>
