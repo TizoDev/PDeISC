@@ -4,20 +4,32 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <form action="" id="formLetras">
-            <h3>Letras</h3>
-            <input type="text" placeholder="Ingresar Valor" id="letra">
+        <form action="" id="formNombres">
+            <h3>Saludo</h3>
+            <input type="text" placeholder="Ingresar un Nombre" id="nombre">
             <br><br>
-            <button type="submit">Agregar Valor</button>
-            <button type="button" onclick="eliminarLetra()">Eliminar Valor de pos 1</button>
-            <button type="button" onclick="insertar()">Insertar Valor en pos 2</button>
-            <br><br>
-            <input type="number" placeholder="Reemplazar por Posicion" id="pos">
-            <br><br>
-            <button type="button" onclick="reemplazar()">Reemplazar Valor</button>
-            <p id="letraText"></p>
+            <button type="submit">Agregar Nombre</button>
+            <p id="nombreText"></p>
         </form>
         <br>
+        <form action="" id="formNumeros">
+            <h3>Numeros</h3>
+            <p>Ingresar 1 Numero</p>
+            <input type="number" placeholder="Numero" id="numero">
+            <br><br>
+            <button type="submit">Enviar Datos</button>
+            <p id="numerosText"></p>
+            <p id="numerosText2"></p>
+        </form>
+        <br>
+        <form action="" id="formNombresEdad">
+            <h3>Nombres y Edad</h3>
+            <input type="text" placeholder="Ingresar un Nombre" id="nombre2">
+            <input type="number" placeholder="Ingresar la Edad" id="edad">
+            <br><br>
+            <button type="submit">Agregar Datos</button>
+            <p id="text"></p>
+        </form>
 
         <script src="ejercicio9/script.js"></script>
     </body>

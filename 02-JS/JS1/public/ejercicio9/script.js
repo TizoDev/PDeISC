@@ -1,100 +1,84 @@
-document.getElementById('formLetras').addEventListener('submit', formLetras);
+document.getElementById('formNombres').addEventListener('submit', formNombres);
+document.getElementById('formNumeros').addEventListener('submit', formNumeros);
+document.getElementById('formNombresEdad').addEventListener('submit', formNombresEdad);
 
-let letras = [];
-function formLetras(event)
+let nombres = [];
+function formNombres(event)
 {
     event.preventDefault();
     
-    let l = document.getElementById('letra').value;
+    let l = document.getElementById('nombre').value;
 
     let valido = true;
     if(l == '')
     {
-        document.getElementById('letraText').innerHTML = "Rellenar todos los campos";
-        valido = false;
-    }
-    if(verificarText(l))
-    {
-        document.getElementById('letraText').innerHTML = "Porfavor no Utilizar caracteres especiales";
+        document.getElementById('nombreText').innerHTML = "Rellenar todos los campos";
         valido = false;
     }
     if(valido)
     {
-        letras.push(l);
-        document.getElementById('letraText').innerHTML = '';
-        letras.forEach(element => {
-            document.getElementById('letraText').innerHTML += element + ', '; 
+        nombres.push(l);
+        document.getElementById('nombreText').innerHTML = '';
+        nombres.forEach(element => {
+            document.getElementById('nombreText').innerHTML += '<p>Saludos ' + element + '</p>'; 
         });
     }
 }
 
-function eliminarLetra()
+let numeros = [];
+function formNumeros(event)
 {
-    letras.splice(1, 1);
-    document.getElementById('letraText').innerHTML = '';
-    letras.forEach(element => {
-        document.getElementById('letraText').innerHTML += element + ', '; 
-    });
-}
-
-function insertar()
-{
-    let l = document.getElementById('letra').value;
+    event.preventDefault();
+    
+    let num = document.getElementById('numero').value;
 
     let valido = true;
-    if(l == '')
+    if(num == '')
     {
-        document.getElementById('letraText').innerHTML = "Rellenar todos los campos";
+        document.getElementById('numerosText').innerHTML = "Rellenar todos los campos";
         valido = false;
     }
-    if(verificarText(l))
+    if(parseInt(num) <= numeros[numeros.length-1])
     {
-        document.getElementById('letraText').innerHTML = "Porfavor no Utilizar caracteres especiales";
+        document.getElementById('numerosText').innerHTML = "El Numero debe ser mayor al anterior";
         valido = false;
     }
     if(valido)
     {
-        letras.splice(2, 0, l);
-        document.getElementById('letraText').innerHTML = '';
-        letras.forEach(element => {
-            document.getElementById('letraText').innerHTML += element + ', '; 
+        numeros.push(parseInt(num));
+        document.getElementById('numerosText').innerHTML = '';
+        document.getElementById('numerosText2').innerHTML = '';
+        numeros.forEach(element => {
+            document.getElementById('numerosText').innerHTML += element + ', '; 
+            document.getElementById('numerosText2').innerHTML += (element*2) + ', '; 
         });
     }
 }
 
-function reemplazar()
+let objetos = []
+function formNombresEdad(event)
 {
-    let l = document.getElementById('letra').value;
-    let n = document.getElementById('pos').value
+    event.preventDefault();
+    
+    let n = document.getElementById('nombre2').value;
+    let e = document.getElementById('edad').value;
 
     let valido = true;
-    if(l == '' || n == '')
+    if(n == '' || e == '')
     {
-        document.getElementById('letraText').innerHTML = "Rellenar todos los campos";
-        valido = false;
-    }
-    if(verificarText(l))
-    {
-        document.getElementById('letraText').innerHTML = "Porfavor no Utilizar caracteres especiales";
+        document.getElementById('text').innerHTML = "Rellenar todos los campos";
         valido = false;
     }
     if(valido)
     {
-        letras.splice(parseInt(n), 1, l);
-        document.getElementById('letraText').innerHTML = '';
-        letras.forEach(element => {
-            document.getElementById('letraText').innerHTML += element + ', '; 
+        let obj = {
+            nombre : n,
+            edad : parseInt(e),
+        };
+        objetos.push(obj);
+        document.getElementById('text').innerHTML = '';
+        objetos.forEach(element => {
+            document.getElementById('text').innerHTML += '<p>' + obj.nombre + ', ' + obj.edad + '</p>'; 
         });
     }
-}
-
-function verificarText(s)
-{
-    //Revisa cada caracter para asegurarse que entre en el estandar
-    //En caso de no estar en el estandar devuelve true
-    for(let i=0; i<s.length; i++)
-    {
-        if(!/[a-zA-Z]/.test(s[i]) && s[i] !== 'ñ' && s[i] !== ' ') return true;
-    }
-    return false;
 }
