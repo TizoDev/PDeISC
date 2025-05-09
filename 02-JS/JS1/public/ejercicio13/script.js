@@ -1,29 +1,6 @@
-document.getElementById('formNombres').addEventListener('submit', formNombres);
 document.getElementById('formNumeros').addEventListener('submit', formNumeros);
+document.getElementById('formPalabra').addEventListener('submit', formPalabra);
 document.getElementById('formNombresEdad').addEventListener('submit', formNombresEdad);
-
-let nombres = [];
-function formNombres(event)
-{
-    event.preventDefault();
-    
-    let l = document.getElementById('nombre').value;
-
-    let valido = true;
-    if(l == '')
-    {
-        document.getElementById('nombreText').innerHTML = "Rellenar todos los campos";
-        valido = false;
-    }
-    if(valido)
-    {
-        nombres.push(l);
-        document.getElementById('nombreText').innerHTML = '';
-        nombres.forEach(element => {
-            document.getElementById('nombreText').innerHTML += '<p>Saludos ' + element + '</p>'; 
-        });
-    }
-}
 
 let numeros = [];
 function formNumeros(event)
@@ -41,11 +18,34 @@ function formNumeros(event)
     if(valido)
     {
         numeros.push(parseInt(num));
+        numeros.sort();
         document.getElementById('numerosText').innerHTML = '';
-        document.getElementById('numerosText2').innerHTML = '';
         numeros.forEach(element => {
             document.getElementById('numerosText').innerHTML += element + ', '; 
-            document.getElementById('numerosText2').innerHTML += (element*2) + ', '; 
+        });
+    }
+}
+
+let elementos = [];
+function formPalabra(event)
+{
+    event.preventDefault();
+    
+    let l = document.getElementById('palabra').value;
+
+    let valido = true;
+    if(l == '')
+    {
+        document.getElementById('palabraText').innerHTML = "Rellenar todos los campos";
+        valido = false;
+    }
+    if(valido)
+    {
+        elementos.push(l);
+        elementos.sort();
+        document.getElementById('palabraText').innerHTML = '';
+        elementos.forEach(element => {
+            document.getElementById('palabraText').innerHTML += element + ','; 
         });
     }
 }
@@ -71,6 +71,7 @@ function formNombresEdad(event)
             edad : parseInt(e),
         };
         objetos.push(obj);
+        objetos.sort((a,b) => a.edad - b.edad);
         document.getElementById('text').innerHTML = '';
         objetos.forEach(element => {
             document.getElementById('text').innerHTML += '<p>' + element.nombre + ', ' + element.edad + '</p>'; 
