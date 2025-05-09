@@ -1,14 +1,65 @@
+*
+{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body
+{
+    background-color: aliceblue;
+}
+
 form
 {
+    background-color: white;
     text-align: center;
     width: 50%;
-    border: 1px solid black;
     border-radius: 10px;
     margin: 0 auto;
+    box-shadow:
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
 input
 {
     width: 95%;
     text-align: center;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+button
+{
+    border-radius: 7px;
+    background-color: rgb(165, 206, 243);
+    transition: 0.5s;
+    border: none;
+    box-shadow:
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+}
+
+div
+{
+    text-align: center;
+}
+
+.botonEnviar
+{
+    font-size: larger;
+    width: 200px;
+    height: 80px;
+    margin: 10px 10px;
+}
+
+button:hover
+{
+    background-color: rgb(51, 158, 252);
+}
+
+@media (max-width: 650px)
+{
+    form
+    {
+        width: 95%;
+    }
 }

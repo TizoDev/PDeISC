@@ -1,6 +1,30 @@
+document.getElementById('formLetra').addEventListener('submit', formLetra);
 document.getElementById('formNumeros').addEventListener('submit', formNumeros);
-document.getElementById('formPalabra').addEventListener('submit', formPalabra);
-document.getElementById('formNombresEdad').addEventListener('submit', formNombresEdad);
+document.getElementById('formString').addEventListener('submit', formString);
+
+let elementos = [];
+function formLetra(event)
+{
+    event.preventDefault();
+    
+    let l = document.getElementById('letra').value;
+
+    let valido = true;
+    if(l == '')
+    {
+        document.getElementById('letraText').innerHTML = "Rellenar todos los campos";
+        valido = false;
+    }
+    if(valido)
+    {
+        elementos.push(l);
+        elementos.reverse();
+        document.getElementById('letraText').innerHTML = '';
+        elementos.forEach(element => {
+            document.getElementById('letraText').innerHTML += element + ','; 
+        });
+    }
+}
 
 let numeros = [];
 function formNumeros(event)
@@ -18,7 +42,7 @@ function formNumeros(event)
     if(valido)
     {
         numeros.push(parseInt(num));
-        numeros.sort();
+        numeros.reverse();
         document.getElementById('numerosText').innerHTML = '';
         numeros.forEach(element => {
             document.getElementById('numerosText').innerHTML += element + ', '; 
@@ -26,55 +50,27 @@ function formNumeros(event)
     }
 }
 
-let elementos = [];
-function formPalabra(event)
+function formString(event)
 {
     event.preventDefault();
     
-    let l = document.getElementById('palabra').value;
+    let l = document.getElementById('string').value;
 
     let valido = true;
     if(l == '')
     {
-        document.getElementById('palabraText').innerHTML = "Rellenar todos los campos";
+        document.getElementById('stringText').innerHTML = "Rellenar todos los campos";
         valido = false;
     }
     if(valido)
     {
-        elementos.push(l);
-        elementos.sort();
-        document.getElementById('palabraText').innerHTML = '';
-        elementos.forEach(element => {
-            document.getElementById('palabraText').innerHTML += element + ','; 
-        });
-    }
-}
-
-let objetos = []
-function formNombresEdad(event)
-{
-    event.preventDefault();
-    
-    let n = document.getElementById('nombre2').value;
-    let e = document.getElementById('edad').value;
-
-    let valido = true;
-    if(n == '' || e == '')
-    {
-        document.getElementById('text').innerHTML = "Rellenar todos los campos";
-        valido = false;
-    }
-    if(valido)
-    {
-        let obj = {
-            nombre : n,
-            edad : parseInt(e),
-        };
-        objetos.push(obj);
-        objetos.sort((a,b) => a.edad - b.edad);
-        document.getElementById('text').innerHTML = '';
-        objetos.forEach(element => {
-            document.getElementById('text').innerHTML += '<p>' + element.nombre + ', ' + element.edad + '</p>'; 
+        let s = [];
+        
+        for(let i=0; i<l.length; i++) s.push(l[i]);
+        s.reverse();
+        document.getElementById('stringText').innerHTML = '';
+        s.forEach(element => {
+            document.getElementById('stringText').innerHTML += element; 
         });
     }
 }
