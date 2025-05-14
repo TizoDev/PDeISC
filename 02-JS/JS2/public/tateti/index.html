@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>Tateti</title>
+        <style>
+            .fila
+            {
+                display: flex;
+            }
+            .celda
+            {
+                width: 180px;
+                height: 180px;
+                border: 1px solid black;
+                text-align: center;
+                font-size: 180px;
+            }
+        </style>
+    </head>
+    <body>
+        <label for="">Jugador Vs PC</label><input type="radio" name="vs">
+        <br>
+        <label for="">Jugador Vs Jugador</label><input type="radio" name="vs" checked>
+        <h3 id="turno">Turno de: Jugador 1</h3>
+        <div id="tateti">
+            <div class="fila">
+                <div id="0-0" class="celda" onclick="agregar(turno, 0, 0)"></div>
+                <div id="1-0" class="celda" onclick="agregar(turno, 1, 0)"></div>
+                <div id="2-0" class="celda" onclick="agregar(turno, 2, 0)"></div>
+            </div>
+            <div class="fila">
+                <div id="0-1" class="celda" onclick="agregar(turno, 0, 1)"></div>
+                <div id="1-1" class="celda" onclick="agregar(turno, 1, 1)"></div>
+                <div id="2-1" class="celda" onclick="agregar(turno, 2, 1)"></div>
+            </div>
+            <div class="fila">
+                <div id="0-2" class="celda" onclick="agregar(turno, 0, 2)"></div>
+                <div id="1-2" class="celda" onclick="agregar(turno, 1, 2)"></div>
+                <div id="2-2" class="celda" onclick="agregar(turno, 2, 2)"></div>
+            </div>
+        </div>
+        <div id="texto"></div>
+        <script src="tateti.js"></script>
+    </body>
+</html>
