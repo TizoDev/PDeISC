@@ -13,6 +13,7 @@ function IniciarJuego()
     document.getElementById('tateti').style.display = 'block';
     document.getElementById('checks').style.display = 'none';
     document.getElementById('boton').style.display = 'none';
+    document.getElementById('victoria').style.display = 'none';
     document.getElementById('turno').style.display = 'block';
 
     let n = Math.floor(Math.random() * 2);
@@ -37,6 +38,7 @@ function reiniciar(event)
         document.getElementById('checks').style.display = 'block';
         document.getElementById('boton').style.display = 'block';
         document.getElementById('turno').style.display = 'none';
+        document.getElementById('victoria').style.display = 'none';
         tateti = [['', '', ''], ['', '', ''], ['', '', '']];
         dibujar();
         vsPc = false;
@@ -61,10 +63,16 @@ function agregar(n, f, c)
             if(p < 9) siguienteTurno(true);
             else
             {
+                document.getElementById('victoria').style.display = 'block';
                 document.getElementById('texto').innerHTML = '<h1>Empate</h1>';
             }
         }
-        else document.getElementById('texto').innerHTML = '<h1>Ganador: ' + jugador + '</h1>';
+        else
+        {
+            document.getElementById('victoria').style.display = 'block';
+            document.getElementById('texto').innerHTML = '<h1>Ganador: ' + jugador + '</h1>';
+        }
+        
     }
 }
 

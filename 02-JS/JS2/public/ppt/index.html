@@ -1,6 +1,12 @@
 <html>
     <head>
         <title>Piedra Papel o Tijeras</title>
+        <style>
+            .seleccionado
+            {
+                background-color: green;
+            }
+        </style>
     </head>
     <body>
         <div id="checks">
@@ -11,9 +17,12 @@
         <h3 id="turno" style="display:none">Turno de: Jugador 1</h3>
         <button onclick="iniciarJuego()" id="boton">Empezar</button>
         <div id="juego" style="display: none;">
-            <button onclick="jugar(0)">Piedra</button>
-            <button onclick="jugar(1)">Papel</button>
-            <button onclick="jugar(2)">Tijeras</button>
+            <div id="tiempo"></div>
+            <button onclick="jugar(0)" id="b0">Piedra</button>
+            <button onclick="jugar(1)" id="b1">Papel</button>
+            <button onclick="jugar(2)" id="b2">Tijeras</button>
         </div>
+
+        <script src="ppt.js"></script>
     </body>
 </html>
