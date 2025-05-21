@@ -5,7 +5,7 @@ body.fon {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background:linear-gradient(rgb(47, 16, 75),rgb(25, 5, 44));
+    background:linear-gradient(blueviolet,rgb(110, 5, 207));
     padding: 10px;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
@@ -106,7 +106,7 @@ body.fon {
 #muerte {
     position: absolute;
     top:10%;
-    background-color: rgba(240, 248, 255, 0.15);
+    background-color: rgba(240, 248, 255, 0.5);
     border: 5px solid black;
     display: none;
     border-radius: 10px;

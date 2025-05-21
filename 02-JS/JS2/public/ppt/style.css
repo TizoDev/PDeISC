@@ -1,7 +1,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #666666; /* Un fondo claro y suave */
+    background:linear-gradient(blueviolet,rgb(110, 5, 207));
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,7 +13,7 @@ body {
 }
 
 /* Contenedores y Texto General */
-#checks, #boton, #turno, #tiempo, #juego {
+#checks, #boton, #turno, #juego {
     margin-bottom: 25px;
     text-align: center;
     width: 100%;
@@ -22,7 +22,7 @@ body {
 
 /* Estilo para Selección de Modo de Juego */
 #checks {
-    background-color: #ffffff;
+    background-color: #c9c9c9;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 4px 4px  10px rgba(0,0,0,0.08);
@@ -30,44 +30,36 @@ body {
 
 /* Estilo del Botón "Empezar" */
 #boton {
-    padding: 14px 30px;
+   height: 50px;
     font-size: 1.25em;
     font-weight: bold;
-    color: #fff;
+    color: #ffffff;
     background-color: #0a0a0a;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    text-align: center;
+   
 }
 
 #boton:hover {
     background-color: #333333;
     transform: translateY(-2px);
 }
-
-/* Contenedor de los Botones de Juego */
-#juego {
-    display: flex;
-    justify-content: center; /* Centra los botones si son menos de 3 o el espacio lo permite */
-    align-items: center;
-}
-
 /* Estilo de los Botones de Elección (Piedra, Papel, Tijeras) */
 #juego button {
-    width: 130px;
-    height: 150px;
+    width: 30%;
+    height: 80%;
     font-size: 1.1em;
     font-weight: bold;
-    color: #555; /* Color inicial del texto */
+    color: #ffffff; /* Color inicial del texto */
     border: 2px solid #e0e0e0; /* Borde sutil */
     border-radius: 12px;
-    background-color: #ffffff;
+    background-color: #000000;
     cursor: pointer;
     transition: all 0.2s ease-out;
 
-    display: flex;
+  
     flex-direction: column; /* Apila el ícono (fondo) y el texto */
     align-items: center;
     justify-content: flex-end; /* Texto en la parte inferior */
@@ -81,7 +73,7 @@ body {
 
 /* Efecto Hover en Botones de Elección - Ícono Azul, borde y sombra azul */
 #juego button:hover {
-    border-color: #007bff;
+    border-color: #120029;
     box-shadow: 0 6px 12px rgba(0, 123, 255, 0.2); /* Sombra más pronunciada */
     transform: translateY(-4px); /* Ligero levantamiento */
     color: #007bff; /* Texto azul */
@@ -103,6 +95,7 @@ body {
 }
 
 #tiempo {
+    margin-bottom: 10px;
     font-size: 1.1em;
     color: #444;
     background-color: #fff;
@@ -113,9 +106,8 @@ body {
 }
 
 #tiempo h2 {
-    margin: 0 0 8px 0;
     font-size: 1.3em;
-    color: #007bff; /* Resultado destacado en azul */
+    color: #000000; /* Resultado destacado en azul */
 }
 #tiempo h2.empate { /* Clase opcional para empate */
     color: #ffc107; /* Amarillo para empate */
@@ -142,3 +134,20 @@ body {
     color: rgb(0, 0, 0);
     font-size: 20px;
 }
+
+@media (max-width: 600px)
+{
+    #tiempo
+    {
+        padding: 0px;
+        width: 100%;
+        margin-left: 0;
+    }
+    #juego button
+    {
+        width: 100%;
+        height: 20%;
+        display: flex;
+    }
+}
+

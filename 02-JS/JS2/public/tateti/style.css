@@ -2,7 +2,7 @@
 body {
     font-family: sans-serif; /* Se añadió una fuente predeterminada */
     margin: 0; /* Se eliminó el margen predeterminado */
-    background: linear-gradient(blueviolet, rgb(89, 18, 155)); /* Fondo degradado */
+    background:linear-gradient(blueviolet,rgb(110, 5, 207)); /* Fondo degradado */
     display: flex; /* Se habilita flexbox para centrar el contenido */
     flex-direction: column; /* Apila los elementos verticalmente */
     align-items: center; /* Centra los elementos horizontalmente */

@@ -3,8 +3,10 @@
         <title>Tateti</title>
         <link rel="stylesheet" href="style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../general.css">
     </head>
     <body class="fondo">
+        <button class="volver" onclick="enviar('/')">Volver</button>
         <div id="checks">
             <label class="JvsP" for="">Jugador Vs PC</label><input type="radio" name="vs" value="true">
             <br>
@@ -31,5 +33,6 @@
         </div>
         <div id="victoria"><div id="texto"></div><h2>Presiona ENTER para reiniciar</h2></div>
         <script src="tateti.js"></script>
+        <script src="../enviar.js"></script>
     </body>
 </html>

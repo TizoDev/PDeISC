@@ -1,10 +1,16 @@
 <html>
     <head>
         <title>Index</title>
+         <link rel="stylesheet" href="style.css">
     </head>
-    <body>
-        <p><a href="/simon">Simon Dice</a></p>
-        <p><a href="/tateti">Tateti</a></p>
-        <p><a href="/piedra-papel-tijeras">Piedra papel o Tijeras</a></p>
+    <body class="fondo">
+      
+        <button class="simon" onclick="enviar('/simon')"><h1>Simon Dice</h1></button>
+        <br>
+        <button class="tateti" onclick="enviar('/tateti')"><h1>Ta te ti</h1></button>
+        <br>
+        <button class="ppt" onclick="enviar('/piedra-papel-tijeras')"><h1>Piedra Papel o Tijeras</h1></button>
+       
+        <script src="enviar.js"></script>
     </body>
 </html>

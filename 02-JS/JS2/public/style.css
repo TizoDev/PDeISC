@@ -1,0 +1,60 @@
+.fondo
+{
+    background:linear-gradient(blueviolet,rgb(110, 5, 207));
+    overflow: hidden;
+}
+
+button
+{
+  width: 40%;
+  height: 30%;
+  margin-left: 30%;
+  font-size: 1.5em;
+  margin-bottom: 5px;
+  color: #ffffff; /* Color inicial del texto */
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: black;
+  border: 2px solid #e0e0e0; /* Borde sutil */
+  border-radius: 12px;
+  background-color: #000000;
+  transition: all 0.2s ease-out;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+}
+
+button:hover
+{
+  border-color: #a561ff;
+  box-shadow: 0 6px 12px rgba(0, 123, 255, 0.2); /* Sombra más pronunciada */
+  transform: translateY(-4px); /* Ligero levantamiento */
+}
+
+.simon
+{
+  background-image: url('imagenes/simon.png');
+}
+
+
+.tateti
+{
+  background-image: url('imagenes/TATETI.png');
+}
+
+.ppt
+{
+  background-image: url('imagenes/PPT.png');
+}
+
+@media (max-width: 750px)
+{
+  button
+  {
+    font-size: medium;
+    width: 80%;
+    margin-left: 5%;
+  }
+}

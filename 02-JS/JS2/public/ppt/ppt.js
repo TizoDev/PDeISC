@@ -91,6 +91,7 @@ function jugar(opcion)
 //Pasado un tiempo determinado cambia de jugador
 function cambioJugador()
 {
+    if(juego[jugador] == -1) jugar(elegirAleatorio()); //Si el jugador no eligio nada pasado el tiempo se elige algo aleatorio
     if(jugador == 1) //Si este es el segundo jugador limpia los intervalos y muestra el resultado
     {
         clearInterval(intervalo1);
@@ -98,7 +99,6 @@ function cambioJugador()
         mostrarResultado();
     }
     tiempoTranscurrido = 0; //Reinicia el tiempo
-    if(juego[jugador] == -1) jugar(elegirAleatorio()); //Si el jugador no eligio nada pasado el tiempo se elige algo aleatorio
 
     if(jugador == 0) //Si es el primer jugador
     {
