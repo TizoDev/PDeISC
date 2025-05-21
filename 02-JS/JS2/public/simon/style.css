@@ -1,0 +1,126 @@
+body.fon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background:linear-gradient(rgb(47, 16, 75),rgb(25, 5, 44));
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.game-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Para el posicionamiento absoluto de .empezar */
+}
+
+.contenedor {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 15px;
+    width: clamp(280px, 80vmin, 450px); /* Ancho responsive */
+    aspect-ratio: 1 / 1; /* Mantiene el contenedor cuadrado */
+    position: relative; /* Necesario para que .empezar se superponga correctamente */
+}
+
+.botonFondo {
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    transition: opacity 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    display: flex; /* Para asegurar que el botón interno se comporte bien */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos individuales para cada botón de color */
+#azul {
+    background-color: blue; 
+    border-radius: 100% 0 0 0;  /* Radio para esquina superior izquierda */
+}
+
+#rojo {
+    background-color: red; 
+    border-radius: 0 100% 0 0;  /* Radio para esquina superior derecha */
+}
+
+#amarillo {
+    background-color: yellow; 
+    border-radius: 0 0 0 100%;/* Radio para esquina inferior izquierda */
+}
+
+#verde {
+    background-color: green; 
+    border-radius: 0 0 100% 0; /* Radio para esquina inferior derecha */
+}
+
+.botonFondo:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(128,128,128,0.6);
+}
+
+.botonSimon {
+    background: none; 
+    width: 100%; 
+    height: 100%; 
+    border: none; 
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    display: block;
+    border-radius: inherit; /* Hereda el border-radius del padre (.botonFondo) */
+}
+
+
+.empezar {
+    background-color: rgb(25, 25, 25); 
+    border-radius: 50%; 
+    width: clamp(120px, 35vmin, 180px); /* Tamaño responsive */
+    height: clamp(120px, 35vmin, 180px); /* Tamaño responsive */
+    position: absolute; /* Se superpone a .contenedor */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrado exacto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10; 
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+}
+
+.si {
+    font-size: clamp(16px, 4vmin, 24px); /* Tamaño de fuente responsive */
+    color: antiquewhite; 
+    padding: 10px; /* Espacio para que el texto no toque los bordes */
+    margin:0; /* Resetea el margen por defecto de h1 */
+   
+}
+
+#muerte {
+    color: antiquewhite;
+    text-align: center;
+    font-size: clamp(18px, 5vmin, 28px);
+    margin-top: 30px; /* Espacio desde el botón de empezar/juego */
+    height: 30px; /* Para evitar saltos de layout si está vacío */
+}
+
+/* Pequeños ajustes para pantallas muy pequeñas si es necesario */
+@media (max-width: 320px) {
+    .contenedor {
+        gap: 10px; /* Reduce el espacio entre botones */
+    }
+    .empezar {
+        width: clamp(100px, 33vmin, 150px);
+        height: clamp(100px, 33vmin, 150px);
+    }
+    .si {
+        font-size: clamp(14px, 3.5vmin, 20px);
+    }
+}

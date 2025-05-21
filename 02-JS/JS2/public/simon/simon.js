@@ -44,6 +44,22 @@ function presionar(color)
         agregarColor(); //Agrega un color mas
         cinematica(); //Muestra el patron a copiar
     }
+    else
+    {
+        var promise = Promise.resolve();
+        promise = promise.then(function () {
+            document.getElementById(color).style.opacity = '100%';
+            return new Promise(function (resolve) {
+              setTimeout(resolve, 200);
+            });
+          });
+        promise = promise.then(function () {
+            document.getElementById(color).style.opacity = '0.6';
+            return new Promise(function (resolve) {
+              setTimeout(resolve, 100);
+            });
+          });
+    }
     //Hace una promesa para hacer un temporizador que activa momentaneamente el color para luego deshabilitarlo
     var promise = Promise.resolve();
     promise = promise.then(function () {
@@ -104,7 +120,7 @@ function cinematica()
           });
         //Luego de esperar un poco
         promise = promise.then(function () {
-            document.getElementById(col).style.opacity = '30%'; //Cambia la opacidad al 30
+            document.getElementById(col).style.opacity = '0.6';
             return new Promise(function (resolve) {
               setTimeout(resolve, 200);
             });

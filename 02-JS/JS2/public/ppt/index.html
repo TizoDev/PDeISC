@@ -1,18 +1,13 @@
 <html>
     <head>
         <title>Piedra Papel o Tijeras</title>
-        <style>
-            .seleccionado
-            {
-                background-color: green;
-            }
-        </style>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div id="checks">
-            <label for="">Jugador Vs PC</label><input type="radio" name="vs" value="true">
+            <label class="text" for="">Jugador Vs PC</label><input type="radio" name="vs" value="true">
             <br>
-            <label for="">Jugador Vs Jugador</label><input type="radio" name="vs" value="false" checked>
+            <label class="text" for="">Jugador Vs Jugador</label><input type="radio" name="vs" value="false" checked>
         </div>
         <h3 id="turno" style="display:none">Turno de: Jugador 1</h3>
         <button onclick="iniciarJuego()" id="boton">Empezar</button>

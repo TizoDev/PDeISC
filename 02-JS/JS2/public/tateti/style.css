@@ -44,7 +44,7 @@ body {
 .boton {
     width: clamp(120px, 30vw, 180px); /* Ancho responsivo */
     height: clamp(30px, 8vh, 40px); /* Alto responsivo */
-    border-radius: 30px; /* Bordes redondeados */
+    border-radius: 10px; /* Bordes redondeados */
     border: 2px solid rgb(24, 24, 24); /* Borde con ancho para visibilidad */
     background-color: #f0f0f0; /* Se añadió un color de fondo predeterminado */
     cursor: pointer; /* Cambia el cursor al pasar por encima */
@@ -72,10 +72,9 @@ body {
 
 /* Estilo de las celdas dentro del tablero de juego */
 .celda {
-    
     flex-grow: 1;
-flex-basis: 0;
-max-width: 33%;/* Permite que las celdas crezcan por igual dentro de una fila */
+    flex-basis: 0;
+    max-width: 33%;/* Permite que las celdas crezcan por igual dentro de una fila */
     /* width: 150px; */ /* Reemplazado por flex-grow */
     /* height: 158px; */ /* Reemplazado por la relación de aspecto del padre y flex-grow */
     aspect-ratio: 1 / 1; /* Mantiene las celdas cuadradas */
@@ -116,9 +115,11 @@ max-width: 33%;/* Permite que las celdas crezcan por igual dentro de una fila */
 
 #victoria
 {
+    color: whitesmoke; /* Color del texto (X/O) */
+    text-shadow: 3px 3px 3px black; /* Sombra de texto ligeramente reducida */
     border: 5px black solid;
     border-radius: 10px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.3);
     position: absolute;
     top: 50%;
     display: none;

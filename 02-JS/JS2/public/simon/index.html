@@ -1,54 +1,21 @@
 <html>
     <head>
         <title>Simon Dice</title>
-        <style>
-            #fondo
-            {
-                display: flex;
-            }
-            .botonFondo
-            {
-                width: 800px;
-                height: 200px;
-                text-align: center;
-            }
-            .botonSimon
-            {
-                background: none;
-                width: 100%;
-                height: 100%;
-                border: none;
-            }
-            #azul
-            {
-                background-color: rgb(0, 0, 255);
-                opacity: 30%;
-            }
-            #amarillo
-            {
-                background-color: rgb(255, 255, 0);
-                opacity: 30%;
-            }
-            #rojo
-            {
-                background-color: rgb(255, 0, 0);
-                opacity: 30%;
-            }
-            #verde
-            {
-                background-color: rgb(0, 255, 0);
-                opacity: 30%;
-            }
-        </style>
+        <link rel="stylesheet" href="style.css">
     </head>
-    <body>
-        <div id="fondo">
-            <div id="azul" class="botonFondo"><button onclick="presionar('azul')" class="botonSimon"></button></div>
-            <div id="amarillo" class="botonFondo"><button onclick="presionar('amarillo')" class="botonSimon"></button></div>
-            <div id="rojo" class="botonFondo"><button onclick="presionar('rojo')" class="botonSimon"></button></div>
-            <div id="verde" class="botonFondo"><button onclick="presionar('verde')" class="botonSimon"></button></div>
+    <body class="fon">
+        <div class="game-wrapper">
+        
+            <div class="contenedor">
+                <div id="azul" class="botonFondo"><button onclick="presionar('azul')" class="botonSimon"></button></div>
+                <div id="rojo" class="botonFondo"><button onclick="presionar('rojo')" class="botonSimon"></button></div>
+                <div id="amarillo" class="botonFondo"><button onclick="presionar('amarillo')" class="botonSimon"></button></div>
+                <div id="verde" class="botonFondo"><button onclick="presionar('verde')" class="botonSimon"></button></div>
+                <div class="empezar"><h1 class="si">Presiona ENTER para comenzar</h1></div>
+            </div>
+        
+            <div id="muerte"></div>
         </div>
-        <div id="muerte"><h1>Presiona ENTER para comenzar</h1></div>
 
         <script src="simon.js"></script>
     </body>
