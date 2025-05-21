@@ -104,11 +104,17 @@ body.fon {
 }
 
 #muerte {
-    color: antiquewhite;
+    position: absolute;
+    top:10%;
+    background-color: rgba(240, 248, 255, 0.15);
+    border: 5px solid black;
+    display: none;
+    border-radius: 10px;
+    z-index: 100;
+    color: rgb(0, 0, 0);
     text-align: center;
     font-size: clamp(18px, 5vmin, 28px);
     margin-top: 30px; /* Espacio desde el botón de empezar/juego */
-    height: 30px; /* Para evitar saltos de layout si está vacío */
 }
 
 /* Pequeños ajustes para pantallas muy pequeñas si es necesario */

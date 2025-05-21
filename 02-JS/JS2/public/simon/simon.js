@@ -8,12 +8,22 @@ let perdio = true; //Si el jugador perdio o no
 
 //Un array con todos los botones disponibles
 let botones = document.querySelectorAll('.botonSimon');
+//Se agrega el evento de click a cada boton
+botones.forEach(bot => {
+    bot.addEventListener('click', async () => {
+        const color = bot.dataset.color;
+        await presionar(color);
+    });
+});
+//Se deshabilitan los botones por default
+deshabilitar();
 
 //Detecta si se presiono el enter para reiniciar el juego
 function tecla(event)
 {
     if(event.keyCode === 13 && perdio == true) //Enter
     {
+        document.getElementById('muerte').style.display = 'none';
         perdio = false;
         iniciarJuego()
     }
@@ -32,48 +42,38 @@ function iniciarJuego()
 }
 
 //Se llama cada que se presiona un color
-function presionar(color)
+async function presionar(color)
 {
     usuario.push(color); //Agrega el color al array del usuario
+    await iluminar(color, 200, 100); //Se espera a que se ilumine el boton
+    await esperar(500); //Se espera un poco mas para que no sea todo seguido
 
     //Revisa que no se haya equivocado
-    if(!comparar()) gameover(); //Si se equivoca termina el juego
+    if(!comparar())
+    {
+        gameover(); //Si se equivoca termina el juego
+        return;
+    }
     if(usuario.length == simon.length && !perdio) //Si no perdio pero llego al final del patron
     {
         deshabilitar(); //Deshabilita los botones
         agregarColor(); //Agrega un color mas
-        cinematica(); //Muestra el patron a copiar
+        await cinematica(); //Muestra el patron a copiar
     }
-    else
-    {
-        var promise = Promise.resolve();
-        promise = promise.then(function () {
-            document.getElementById(color).style.opacity = '100%';
-            return new Promise(function (resolve) {
-              setTimeout(resolve, 200);
-            });
-          });
-        promise = promise.then(function () {
-            document.getElementById(color).style.opacity = '0.6';
-            return new Promise(function (resolve) {
-              setTimeout(resolve, 100);
-            });
-          });
-    }
-    //Hace una promesa para hacer un temporizador que activa momentaneamente el color para luego deshabilitarlo
-    var promise = Promise.resolve();
-    promise = promise.then(function () {
-        document.getElementById(color).style.opacity = '80%';
-        return new Promise(function (resolve) {
-          setTimeout(resolve, 200);
-        });
-      });
-    promise = promise.then(function () {
-        document.getElementById(color).style.opacity = '30%';
-        return new Promise(function (resolve) {
-          setTimeout(resolve, 100);
-        });
-      });
+}
+
+function esperar(ms) //Hace que el codigo espere cierta cantidad de tiempo antes de continuar
+{
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+//Hace una animacion de iluminar un boton por cierta cantidad de tiempo
+async function iluminar(color, temp1, temp2)
+{
+    document.getElementById(color).style.opacity = '100%'; //Cambia la opacidad al 100
+    await esperar(temp1);
+    document.getElementById(color).style.opacity = '0.6';
+    await esperar(temp2);
 }
 
 //Agrega un color aleatorio a la vez que borra los colores que ingreso el usuario
@@ -107,38 +107,21 @@ function habilitar()
     });
 }
 
-function cinematica()
+async function cinematica()
 {
     //Muestra el patron de a poco, con un poco de tiempo entre iteraciones
-    var promise = Promise.resolve();
-    simon.forEach(col =>{
-        promise = promise.then(function () {
-            document.getElementById(col).style.opacity = '100%'; //Cambia la opacidad al 100
-            return new Promise(function (resolve) {
-              setTimeout(resolve, 600);
-            });
-          });
-        //Luego de esperar un poco
-        promise = promise.then(function () {
-            document.getElementById(col).style.opacity = '0.6';
-            return new Promise(function (resolve) {
-              setTimeout(resolve, 200);
-            });
-          });
-    });
-    promise = promise.then(function () {
-        habilitar();
-        return new Promise(function (resolve)
-        {
-            setTimeout(resolve, simon.length * 800);
-        });
-    });
+    for (let col of simon) 
+    {
+        await iluminar(col, 800, 200);//Ilumina el boton correspondiente
+    };
+    habilitar(); // Habilita los botones después de mostrar la secuencia
 }
 
 function gameover()
 {
     //Deshabilita todos lso botones y le muestra al jugador que perdio y cuantos puntos tuvo
     deshabilitar();
+    document.getElementById('muerte').style.display = 'block';
     document.getElementById('muerte').innerHTML = '<h1>Perdiste!!</h1><h3>Puntuacion: ' + simon.length + '</h3><h3>Presiona Enter para volver a intentarlo</h3>';
     perdio = true;    
 }
