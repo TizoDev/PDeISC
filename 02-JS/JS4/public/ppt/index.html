@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Piedra Papel o Tijeras</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../general.css">
+    </head>
+    <body>
+        <button class="volver" onclick="enviar('../index.html')">Volver</button>
+        <div id="checks">
+            <label class="text" for="">Jugador Vs PC</label><input type="radio" name="vs" value="true">
+            <br>
+            <label class="text" for="">Jugador Vs Jugador</label><input type="radio" name="vs" value="false" checked>
+        </div>
+        <h3 id="turno" style="display:none">Turno de: Jugador 1</h3>
+        <button onclick="iniciarJuego()" id="boton">Empezar</button>
+        <div id="juego" style="display: none;">
+            <div id="tiempo"></div>
+            <button onclick="jugar(0)" id="b0">Piedra</button>
+            <button onclick="jugar(1)" id="b1">Papel</button>
+            <button onclick="jugar(2)" id="b2">Tijeras</button>
+        </div>
+        <script src="ppt.js"></script>
+        <script src="../enviar.js"></script>
+    </body>
+</html>

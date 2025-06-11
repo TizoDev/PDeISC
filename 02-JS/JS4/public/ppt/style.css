@@ -1,0 +1,153 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:linear-gradient(blueviolet,rgb(110, 5, 207));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Contenedores y Texto General */
+#checks, #boton, #turno, #juego {
+    margin-bottom: 25px;
+    text-align: center;
+    width: 100%;
+    max-width: 500px; /* Limita el ancho para mejor lectura en pantallas grandes */
+}
+
+/* Estilo para Selección de Modo de Juego */
+#checks {
+    background-color: #c9c9c9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 4px 4px  10px rgba(0,0,0,0.08);
+}
+
+/* Estilo del Botón "Empezar" */
+#boton {
+   height: 50px;
+    font-size: 1.25em;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #0a0a0a;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+   
+}
+
+#boton:hover {
+    background-color: #333333;
+    transform: translateY(-2px);
+}
+/* Estilo de los Botones de Elección (Piedra, Papel, Tijeras) */
+#juego button {
+    width: 30%;
+    height: 80%;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #ffffff; /* Color inicial del texto */
+    border: 2px solid #e0e0e0; /* Borde sutil */
+    border-radius: 12px;
+    background-color: #000000;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+
+  
+    flex-direction: column; /* Apila el ícono (fondo) y el texto */
+    align-items: center;
+    justify-content: flex-end; /* Texto en la parte inferior */
+    padding: 15px 10px; /* Espacio interno, más en la parte inferior para el texto */
+
+    background-repeat: no-repeat;
+    background-position: center 30px; /* Posición del ícono (un poco abajo del centro superior) */
+    background-size: 55px 55px; /* Tamaño del ícono de la mano */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.07);
+}
+
+/* Efecto Hover en Botones de Elección - Ícono Azul, borde y sombra azul */
+#juego button:hover {
+    border-color: #120029;
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.2); /* Sombra más pronunciada */
+    transform: translateY(-4px); /* Ligero levantamiento */
+    color: #007bff; /* Texto azul */
+}
+
+.seleccionado {
+    border-color: #28a745 !important; /* Borde verde, importante para anular hover */
+    box-shadow: 0 6px 14px rgba(40, 167, 69, 0.3) !important; /* Sombra verde */
+    color: #28a745 !important; /* Texto verde */
+    transform: translateY(-2px) scale(1.03); /* Ligero levantamiento y escala */
+}
+
+/* Estilo para los Mensajes de Turno y Resultado */
+#turno {
+    font-size: 1.2em;
+    color: #333; /* Un color de texto más oscuro para el turno */
+    font-weight: bold;
+    min-height: 25px; /* Evita saltos de layout */
+}
+
+#tiempo {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #444;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.06);
+    min-height: 60px; /* Para dar espacio a los mensajes */
+}
+
+#tiempo h2 {
+    font-size: 1.3em;
+    color: #000000; /* Resultado destacado en azul */
+}
+#tiempo h2.empate { /* Clase opcional para empate */
+    color: #ffc107; /* Amarillo para empate */
+}
+#tiempo h2.gana { /* Clase opcional para victoria */
+    color: #28a745; /* Verde para victoria */
+}
+#tiempo h2.pierde { /* Clase opcional para derrota (PC GANA) */
+    color: #dc3545; /* Rojo para derrota */
+}
+
+#tiempo p {
+    margin: 0;
+    font-size: 1em;
+    color: #666;
+}
+
+/* Ocultar elementos (manejado por JS con display:none, pero puedes usar clases si prefieres) */
+.oculto {
+    display: none !important;
+}     
+
+.text{
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+}
+
+@media (max-width: 600px)
+{
+    #tiempo
+    {
+        padding: 0px;
+        width: 100%;
+        margin-left: 0;
+    }
+    #juego button
+    {
+        width: 100%;
+        height: 20%;
+        display: flex;
+    }
+}
+

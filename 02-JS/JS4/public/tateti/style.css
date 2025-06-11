@@ -1,0 +1,149 @@
+/* Configuraciones generales del cuerpo y fuente */
+body {
+    font-family: sans-serif; /* Se añadió una fuente predeterminada */
+    margin: 0; /* Se eliminó el margen predeterminado */
+    background:linear-gradient(blueviolet,rgb(110, 5, 207)); /* Fondo degradado */
+    display: flex; /* Se habilita flexbox para centrar el contenido */
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    min-height: 10vh; /* Asegura que el cuerpo ocupe al menos la altura completa de la ventana gráfica */
+    padding: 2px; /* Añade algo de relleno alrededor del contenido */
+    box-sizing: border-box; /* Incluye el relleno y el borde en el ancho y alto total del elemento */
+    text-align: center;
+    overflow: hidden;
+}
+/* Estilo para las etiquetas dentro de #checks */
+#checks label {
+    font-size: clamp(18px, 4vw, 35px); /* Tamaño de fuente responsivo: mínimo, preferido, máximo */
+    margin: 5px 15px; /* Espaciado alrededor de las etiquetas */
+    color: transparent; /* Color de texto transparente para que el fondo se muestre a través */
+    -webkit-background-clip: text; /* Recorta el fondo al texto (para navegadores WebKit) */
+    background-clip: text; /* Recorta el fondo al texto */
+    -webkit-text-fill-color: transparent; /* Hace que el color del texto sea transparente (para navegadores WebKit) */
+}
+
+/* Estilo específico para la etiqueta JvsP */
+.JvsP {
+    background: linear-gradient(to right, rgb(251, 255, 249), rgb(20, 167, 69)); /* Fondo degradado específico */
+}
+
+/* Estilo específico para la etiqueta JvsJ */
+.JvsJ {
+    background: linear-gradient(to right, rgb(111, 190, 138), rgb(20, 167, 69)); /* Fondo degradado específico */
+}
+
+/* Indicador de turno */
+#turno {
+    font-size: clamp(20px, 5vw, 30px); /* Tamaño de fuente responsivo */
+    color: rgb(29, 15, 15); /* Asumiendo que quieres un color claro basado en otros elementos */
+    text-shadow: 2px 2px 4px black; /* Sombra de texto simplificada */
+    margin-bottom: 20px; /* Espacio debajo del indicador de turno */
+}
+
+/* Botón de Empezar */
+.boton {
+    width: clamp(120px, 30vw, 180px); /* Ancho responsivo */
+    height: clamp(30px, 8vh, 40px); /* Alto responsivo */
+    border-radius: 10px; /* Bordes redondeados */
+    border: 2px solid rgb(24, 24, 24); /* Borde con ancho para visibilidad */
+    background-color: #f0f0f0; /* Se añadió un color de fondo predeterminado */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    font-size: clamp(14px, 3vw, 18px); /* Tamaño de fuente responsivo */
+    margin-bottom: 30px; /* Espacio debajo del botón */
+}
+.boton:hover {
+    background-color: #2c1f1f; /* Oscurece el botón al pasar por encima */
+}
+
+/* Contenedor principal del tablero de juego */
+#tateti {
+    display: flex; 
+    flex-direction: column; /* Apila las filas verticalmente */
+    width: clamp(280px, 90vw, 500px); /* Ancho responsivo, máximo 500px */
+    max-width: 90vmin; /* Ancho máximo relativo a la dimensión más pequeña de la ventana gráfica */
+    margin: 0 auto; /* Centra el tablero */
+    aspect-ratio: 1 / 1; /* Mantiene una relación de aspecto cuadrada */
+}
+
+/* Estilo de las filas dentro del tablero de juego */
+.fila {
+    display:flex;
+}
+
+/* Estilo de las celdas dentro del tablero de juego */
+.celda {
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 33%;/* Permite que las celdas crezcan por igual dentro de una fila */
+    /* width: 150px; */ /* Reemplazado por flex-grow */
+    /* height: 158px; */ /* Reemplazado por la relación de aspecto del padre y flex-grow */
+    aspect-ratio: 1 / 1; /* Mantiene las celdas cuadradas */
+    box-shadow: 5px 5px 5px rgb(33, 2, 59); /* Sombra ligeramente reducida para responsividad */
+    text-align: center; /* Alineación de texto al centro */
+    font-size: clamp(40px, 15vw, 100px); /* Tamaño de fuente responsivo para X/O */
+    border-radius: clamp(10px, 5vw, 30px); /* Radio de borde responsivo */
+    background-color: rgb(112, 33, 187); /* Color de fondo */
+    margin: 5px; /* Margen alrededor de la celda */
+    color: whitesmoke; /* Color del texto (X/O) */
+    text-shadow: 3px 3px 3px black; /* Sombra de texto ligeramente reducida */
+    display: flex; /* Para centrar X/O vertical y horizontalmente */
+    justify-content: center; /* Centra contenido horizontalmente */
+    align-items: center; /* Centra contenido verticalmente */
+    cursor: pointer; /* Indica que es clickeable */
+}
+
+.celda:hover {
+    background-color: blueviolet; /* Cambia el color de fondo al pasar el cursor */
+}
+
+/* Estilo del mensaje del ganador */
+#texto {
+    margin-top: 20px; /* Espacio encima del mensaje del ganador */
+    width: 100%; /* Ocupa el ancho completo para centrar el texto */
+    text-align: center; /* Centra el h1 si es un inline-block o similar */
+}
+
+.ganad {
+    font-size: clamp(24px, 6vw, 35px); /* Tamaño de fuente responsivo */
+    color: whitesmoke; /* Color del texto */
+    text-shadow: 2px 2px 4px black; /* Sombra de texto simplificada */
+    padding: 5px; /* Relleno interno */
+    background-color: rgba(0,0,0,0.3); /* Opcional: añade un ligero fondo para legibilidad */
+    border-radius: 10px; /* Bordes redondeados */
+    display: inline-block; /* Permite centrar mediante text-align en el padre */
+}
+
+#victoria
+{
+    color: whitesmoke; /* Color del texto (X/O) */
+    text-shadow: 3px 3px 3px black; /* Sombra de texto ligeramente reducida */
+    border: 5px black solid;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    
+    top: 50%;
+    display: none;
+}
+
+#victoria h2, #victoria h1
+{
+    margin: 5px;
+}
+
+/* Media query para pantallas muy pequeñas si se necesitan más ajustes */
+@media (max-width: 100px) {
+    .celda {
+        font-size: clamp(15px, 6vw, 40px); /* Reduce aún más el tamaño de fuente en las celdas */
+        border-radius: clamp(4px, 2vw, 10px); /* Radio de borde más pequeño */
+    }
+
+    #checks label {
+        font-size: clamp(16px, 3.5vw, 30px); /* Tamaño de fuente más pequeño para etiquetas */
+        margin: 5px 10px; /* Margen ajustado */
+    }
+
+    .boton {
+        width: clamp(100px, 25vw, 150px); /* Ancho ajustado para botón */
+        height: clamp(25px, 7vh, 35px); /* Alto ajustado para botón */
+    }
+}

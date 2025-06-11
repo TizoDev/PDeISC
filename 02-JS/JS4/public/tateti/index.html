@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Tateti</title>
+        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../general.css">
+    </head>
+    <body class="fondo">
+        <button class="volver" onclick="enviar('../index.html')">Volver</button>
+        <div id="checks">
+            <label class="JvsP" for="">Jugador Vs PC</label><input type="radio" name="vs" value="true">
+            <br>
+            <label class="JvsJ" for="">Jugador Vs Jugador</label><input type="radio" name="vs" value="false" checked>
+        </div>
+        <h3 id="turno" style="display:none">Turno de: Jugador 1</h3>
+        <button class="boton" onclick="IniciarJuego()" id="boton">Empezar</button>
+        <div id="tateti" style="display:none">
+            <div class="fila">
+                <div id="0-0" class="celda" onclick="agregar(turno, 0, 0)"></div>
+                <div id="1-0" class="celda" onclick="agregar(turno, 0, 1)"></div>
+                <div id="2-0" class="celda" onclick="agregar(turno, 0, 2)"></div>
+            </div>
+            <div class="fila">
+                <div id="0-1" class="celda" onclick="agregar(turno, 1, 0)"></div>
+                <div id="1-1" class="celda" onclick="agregar(turno, 1, 1)"></div>
+                <div id="2-1" class="celda" onclick="agregar(turno, 1, 2)"></div>
+            </div>
+            <div class="fila">
+                <div id="0-2" class="celda" onclick="agregar(turno, 2, 0)"></div>
+                <div id="1-2" class="celda" onclick="agregar(turno, 2, 1)"></div>
+                <div id="2-2" class="celda" onclick="agregar(turno, 2, 2)"></div>
+            </div>
+        </div>
+        <div id="victoria"><div id="texto"></div><h2>Presiona para reiniciar</h2></div>
+        <script src="tateti.js"></script>
+        <script src="../enviar.js"></script>
+    </body>
+</html>

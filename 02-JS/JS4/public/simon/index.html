@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Simon Dice</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../general.css">
+    </head>
+    <body class="fon">
+        <button class="volver" onclick="enviar('../index.html')">Volver</button>
+        <div class="game-wrapper">
+        
+            <div class="contenedor">
+                <div id="azul" class="botonFondo"><button data-color="azul" class="botonSimon"></button></div>
+                <div id="rojo" class="botonFondo"><button data-color="rojo" class="botonSimon"></button></div>
+                <div id="amarillo" class="botonFondo"><button data-color="amarillo" class="botonSimon"></button></div>
+                <div id="verde" class="botonFondo"><button data-color="verde" class="botonSimon"></button></div>
+                <div class="empezar" id="empezar"><h1 class="si">Presiona para comenzar</h1></div>
+            </div>
+        
+            <div id="muerte"></div>
+        </div>
+
+        <script src="simon.js"></script>
+        <script src="../enviar.js"></script>
+    </body>
+</html>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">js2apk</string>
+    <string name="title_activity_main">js2apk</string>
+    <string name="package_name">com.js2apk.app</string>
+    <string name="custom_url_scheme">com.js2apk.app</string>
+</resources>
