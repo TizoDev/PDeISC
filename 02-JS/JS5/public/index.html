@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Index</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <button id="actualizar">Actualizar</button>
+        <div class="container">
+            <form>
+                <h2>Ingresar Animal</h2>
+                <input type="text" id="inputnombre" placeholder="Nombre">
+                <input type="number" id="inputjaula" placeholder="Jaula">
+                <br>
+                <select name="idanimal" id="inputanimal">
+                    <option value="1">Felino</option>
+                    <option value="2">Ave</option>
+                    <option value="3">Reptil</option>
+                </select>
+                <br>
+                <input type="number" id="inputpeso" placeholder="Peso (en kg)">
+                <br>
+                <button id="botonenviar" type="button">Enviar</button>
+            </form>
+            <div id="error"></div>
+            <div class="seccion">
+                <h2>Tabla de Animales</h2>
+                <table border="solid" id="tablaAnimal">
+                    
+                </table>
+            </div>
+            <div class="seccion reducida">
+                <h2>Informacion</h2>
+                <p id="consignab"></p>
+                <p id="consignac"></p>
+                <p id="consignad"></p>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
