@@ -49,7 +49,7 @@ function cargartxt()
 {
     esconderError();
 
-    const fileName = 'outputP2.txt';  //Se elige la ruta del archivo
+    const fileName = 'public/pro2/outputP2.txt';  //Se elige la ruta del archivo
     const data = arrayFiltrado.join('\n'); // Convertimos el array a texto con saltos de línea
 
     //Llama al servidor para guardar la informacion en un txt utilizando post y fetch
@@ -61,6 +61,7 @@ function cargartxt()
     .then(res => res.json())
     .then(response => cargarError(response.message))
     .catch(err => cargarError('Error al guardar archivo: ' + err.message));
+    document.getElementById('descargar').style.display = 'block';
 }
 
 function cargarError(error)

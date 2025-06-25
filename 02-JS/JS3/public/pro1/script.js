@@ -33,7 +33,7 @@ function ingresarNumero()
 function enviarArchivo()
 {
     esconderError();
-    const fileName = 'outputP1.txt'; //Se elige la ruta del archivo
+    const fileName = 'public/pro1/outputP1.txt'; //Se elige la ruta del archivo
     const data = array.join('\n'); // Convertimos el array a texto con saltos de línea
 
     if(array.length >= 10) //Si el array tiene mas de 10 numeros
@@ -47,6 +47,7 @@ function enviarArchivo()
         .then(res => res.json())
         .then(response => cargarError(response.message))
         .catch(err => cargarError('Error al guardar archivo: ' + err.message));
+        document.getElementById('descargar').style.display = 'block';
     }
     else
     {

@@ -14,6 +14,14 @@ app.get('/', (req, res) => {
     //Le enviamos el archivo de index.html al servidor
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+app.get('/output1', (req, res) => {
+  //Enlace vinculado al txt para poder descargarlo
+  res.sendFile(path.join(__dirname, 'public/pro1', 'outputP1.txt'));
+});
+app.get('/output2', (req, res) => {
+  //Enlace vinculado al txt para poder descargarlo
+  res.sendFile(path.join(__dirname, 'public/pro2', 'outputP2.txt'));
+});
 app.get('/proyecto-1', (req, res) => {
     //Le enviamos el archivo de index.html al servidor
     res.sendFile(path.join(__dirname, 'public/pro1', 'index.html'));
