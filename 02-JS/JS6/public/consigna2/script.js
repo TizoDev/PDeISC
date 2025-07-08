@@ -3,13 +3,15 @@ document.getElementById('formulario').addEventListener('submit', enviar);
 function enviar(event)
 {
     event.preventDefault();
+    //Se limpian las etiquetas
     document.getElementById('error').innerHTML = '';
     document.getElementById('ok').innerHTML = '';
-
+    //Se guardan las variables
     let nombre = document.getElementById('nombre').value;
     let email = document.getElementById('email').value;
     let valido = true;
 
+    //Se verifician las variables
     if(verificarText(nombre))
     {
         valido = false;
@@ -27,6 +29,7 @@ function enviar(event)
     }
     if(valido)
     {
+        //Si todo es valido se trata de agregar al usuario
         fetch('/addUsuario',{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -34,6 +37,7 @@ function enviar(event)
         })
         .then(response => response.text())
         .then(data => {
+            //Se muestra la ID por pantalla
             document.getElementById('ok').innerHTML = 'ENVIADO: Id ' + data;
         });
     }

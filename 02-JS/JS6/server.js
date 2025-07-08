@@ -1,21 +1,24 @@
-//Importando el modulo express y el modulo path
+//Importando el modulo express, path, axios y url
 import express from 'express';
 import axios from 'axios';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 const app = express();
-const port = 8081;
+const port = 8081; //Puerto asignado
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+//Funcion que lee los datos de una API
 async function leerUrl(url) 
 {
     try 
     {
+        //Se trata de leer los datos de la URL utilizando axios
         const response = await axios.get(url);
         return response.data;
     } catch (error) 
     {
+        //En caso de que algo falle, como por ejemplo que la url este mal
         throw error;
     }
 }
@@ -46,6 +49,7 @@ app.get('/c4', (req, res) => {
     res.sendFile(join(__dirname, 'public/consigna4', 'index.html'));
 });
 
+//Obtiene la informacion de una ruta especifica utilizando la funcion obtener ruta y lo envia 
 app.post('/obtenerData', function(req, res){
     const { ruta } = req.body;
     leerUrl(ruta)
@@ -57,19 +61,22 @@ app.post('/obtenerData', function(req, res){
     });
 });
 
-let usuarios = [];
+let usuarios = []; //Array para guardar los usuarios de la api
 app.post('/addUsuario', function(req,res){
-    const { nombre, email } = req.body;
+    const { nombre, email } = req.body; //Valores del usuario
     
+    //Objeto Usuario
     const usuario = {
         id: usuarios.length,
         name: nombre,
-        email
+        email: email
     };
+    //Se agrega el objeto al array y se envia su ID hacia quien solicito enviar este usuario
     usuarios.push(usuario);
     res.send(usuarios.length-1);
 });
 
+//Api que guarda los valores de todos los usuarios
 app.get('/api/usuarios', (req, res) => {
     res.json(usuarios);
 });
