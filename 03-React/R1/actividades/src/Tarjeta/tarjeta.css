@@ -1,0 +1,17 @@
+.tarjeta
+{
+  background-color: #fff0f0;
+  border-radius: 20px;
+  border: 5px solid #121418;
+  color: black;
+}
+
+td
+{
+  min-width: 15vw;
+}
+
+.foto
+{
+  height: 100%;
+}
