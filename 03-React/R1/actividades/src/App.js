@@ -1,8 +1,8 @@
-import Hola from './HolaMundo/holamundo'
-import Tarjeta from './Tarjeta/Tarjeta'
-import Contador from './Contador/Contador'
-import Tareas from './Tareas/Tareas'
-import Formulario from './Formulario/Formulario'
+import Hola from './components/HolaMundo/holamundo'
+import Tarjeta from './components/Tarjeta/Tarjeta'
+import Contador from './components/Contador/Contador'
+import Tareas from './components/Tareas/Tareas'
+import Formulario from './components/Formulario/Formulario'
 import './App.css';
 
 function App() {
