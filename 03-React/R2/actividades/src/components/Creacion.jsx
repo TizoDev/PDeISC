@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Inicio(prop) 
+function Inicio() 
 {
     function guardar(e)
     {
@@ -16,9 +16,22 @@ function Inicio(prop)
         }
         if(valido == true)
         {
-            let temp = prop.tarea;
-            alert
+            let temp = localStorage.getItem('tareas');
+            const fechaActual = new Date();
+
+            let tar = {
+                completa: `${document.getElementById('completado').checked}`,
+                titulo: document.getElementById('titulo').value,
+                descripcion: document.getElementById('descripcion').value,
+                fecha: `${fechaActual.getDate()} - ${fechaActual.getMonth() + 1} - ${fechaActual.getFullYear()}`
+            };
+
+            tar = JSON.stringify(tar);
+            tar = tar.slice(1);
+            temp.pop();
+            localStorage.setItem('tareas', JSON.stringify(temp));
         }
+
     }
 
     return (

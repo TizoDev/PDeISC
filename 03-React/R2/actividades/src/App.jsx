@@ -19,6 +19,8 @@ function App() {
     fecha: 'hoy'
   },
 ]);
+localStorage.setItem('tareas', JSON.stringify(tareas));
+
   return (
     <div>
       <nav>
@@ -27,7 +29,7 @@ function App() {
         <p><Link to="/creacion">Creacion</Link></p>
       </nav>
       <div>
-
+        {localStorage.getItem('tareas')}
       </div>
       <Routes>
         <Route path="/" element={<Inicio />} />
