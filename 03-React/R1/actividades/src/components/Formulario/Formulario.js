@@ -9,8 +9,11 @@ function Formulario()
     {
         e.preventDefault();
         let nom = document.getElementById("inputNombre").value;
-        setNombre(nom);
-        document.getElementById("saludo").style.display = 'block';
+        if(nom !== "")
+        {
+            setNombre(nom);
+            document.getElementById("saludo").style.display = 'block';
+        }
     }
 
     return (

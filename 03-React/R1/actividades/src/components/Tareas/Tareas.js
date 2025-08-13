@@ -25,16 +25,20 @@ function Tareas()
     function agregar()
     {
         let temp = Array.from(tareas);
-        let tar = {
-            completa: 'false',
-            tarea: 'Seguir Durmiendo'
-        };
-        temp.push(tar)
-        setTareas(temp);
+        if(document.getElementById("input").value !== "")
+        {
+            let tar = {
+                completa: 'false',
+                tarea: document.getElementById("input").value
+            };
+            temp.push(tar)
+            setTareas(temp);
+        }
     }
 
     return (
         <div className='lista'>
+            <input id="input"/>
             <button onClick={agregar} className='agregarButton'> Agregar Tarea </button>
             {tareas.map(tar => {
                 return (

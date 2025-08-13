@@ -12,9 +12,9 @@ function App() {
         <Hola />
         <br />
         <Tarjeta 
-          foto = '/logo192.png'
-          nombre = 'Josue'
-          apellido = 'Rodrigez'
+          foto = '/homero.jpg'
+          nombre = 'Homero'
+          apellido = 'Simpson'
           profesion = 'Ingeniero'
         />
         <br />
