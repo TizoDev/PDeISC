@@ -17,19 +17,20 @@ function Inicio()
         if(valido == true)
         {
             let temp = localStorage.getItem('tareas');
+            temp = JSON.parse(temp);
             const fechaActual = new Date();
 
             let tar = {
+                id: `${temp.length}`,
                 completa: `${document.getElementById('completado').checked}`,
                 titulo: document.getElementById('titulo').value,
                 descripcion: document.getElementById('descripcion').value,
-                fecha: `${fechaActual.getDate()} - ${fechaActual.getMonth() + 1} - ${fechaActual.getFullYear()}`
+                fecha: `${fechaActual.getDate()}/${fechaActual.getMonth()+1}/${fechaActual.getFullYear()}`
             };
 
-            tar = JSON.stringify(tar);
-            tar = tar.slice(1);
-            temp.pop();
+            temp.push(tar);
             localStorage.setItem('tareas', JSON.stringify(temp));
+            alert(temp);
         }
 
     }

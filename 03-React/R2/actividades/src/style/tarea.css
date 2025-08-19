@@ -1,0 +1,16 @@
+.true
+{
+    text-decoration: line-through;
+}
+.false
+{
+    text-decoration: none;
+}
+.descripcion
+{
+    width: 200px;
+    height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
