@@ -6,11 +6,12 @@
 {
     text-decoration: none;
 }
-.descripcion
+.descripcion, .titulo
 {
     width: 200px;
-    height: 20px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: middle;
 }

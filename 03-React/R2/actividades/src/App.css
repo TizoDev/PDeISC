@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+.error
+{
+    border: 2px red solid;
+}
