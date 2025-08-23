@@ -89,7 +89,7 @@ function Detalle(props)
 
     return (
         <div className="max-w-3xl mx-auto p-6 bg-white shadow rounded-lg border border-gray-200 space-y-6">
-          <h1 className="lectura text-2xl font-bold text-gray-800">
+          <h1 className="lectura text-2xl font-bold text-gray-800 recorte">
             {tarea.titulo} <span className="text-gray-500 text-lg">- {tarea.fecha}</span>
           </h1>
           <textarea id="titulo" rows="1" className="editar w-full border rounded-lg p-2 text-lg font-semibold text-gray-800 focus:ring focus:ring-blue-300" defaultValue={tarea.titulo} />
@@ -97,7 +97,7 @@ function Detalle(props)
             Completada:
             <input disabled type="checkbox" id="completado" defaultChecked={comp} className="h-5 w-5 text-green-600" />
           </h3>
-          <p className="text-gray-700 lectura">{tarea.descripcion}</p>
+          <p className="text-gray-700 lectura recorte">{tarea.descripcion}</p>
           <textarea id="descripcion" rows="10" className="editar w-full border rounded-lg p-2 text-gray-700 focus:ring focus:ring-blue-300" defaultValue={tarea.descripcion} />
           <div className="flex flex-wrap gap-3">
             <button onClick={editar} className="lectura bg-yellow-500 text-white px-4 py-2 rounded-lg shadow hover:bg-yellow-600 transition">Editar Tarea</button>

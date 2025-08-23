@@ -2,3 +2,10 @@
 {
     display:none;
 }
+
+.recorte
+{
+    width: 100%;
+    white-space: pre-line;
+    word-break: break-all;
+}
