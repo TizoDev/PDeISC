@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+//Lee una url dada y devuelve el contenido
 export async function leerUrl(url) 
 {
     try 

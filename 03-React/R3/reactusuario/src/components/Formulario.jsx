@@ -1,5 +1,8 @@
+//Se pasa por parametro una funcion con lo que se debe realizar al subir los datos
+//y valores de para que se usa el formulario
 function Formulario({ subirDatos, datos })
 {      
+    //Valores por defecto para los campos del formulario
     let defaultValues = {
         nombre: '',
         apellido: '',
@@ -8,6 +11,8 @@ function Formulario({ subirDatos, datos })
         fecha_nacimiento: '',
         email: ''
     }
+    //En caso que se quiera editar un usuario se rellenan los valores por defecto
+    //Con los que se pasen por parametro
     if(datos.modo === "editar")
     {
         defaultValues = {
@@ -19,7 +24,7 @@ function Formulario({ subirDatos, datos })
             email: datos.usuario.email
         }
     }
-    
+    //Valida uno por uno todos los campos necesarios.
     function validar(e)
     {
         e.preventDefault();
@@ -37,79 +42,80 @@ function Formulario({ subirDatos, datos })
         let fecha_nacimiento = document.getElementById('fecha').value;
         let email = document.getElementById('email').value;
         document.getElementById('email').classList.remove('error');
-
+        //Si algun campo no esta segun los estandares se cancela la operacion y se informa que sucedio
         if(!verificarText(nombre))
         {
-            valido = false;
-            error.innerHTML = 'Ingresar un nombre valido';
-            document.getElementById('nombre').classList.add('error');
+          valido = false;
+          error.innerHTML = 'Ingresar un nombre valido';
+          document.getElementById('nombre').classList.add('error');
         }
         if(!verificarText(apellido))
         {
-            valido = false;
-            error.innerHTML = 'Ingresar un apellido valido';
-            document.getElementById('apellido').classList.add('error');
+          valido = false;
+          error.innerHTML = 'Ingresar un apellido valido';
+          document.getElementById('apellido').classList.add('error');
         }
         if(!verificarTextconNumeros(direccion))
         {
-            valido = false;
-            error.innerHTML = 'Ingresar una direccion valida';
-            document.getElementById('direccion').classList.add('error');
+          valido = false;
+          error.innerHTML = 'Ingresar una direccion valida';
+          document.getElementById('direccion').classList.add('error');
         }
         if(!verificarTelef(telefono))
         {
-            valido = false;
-            error.innerHTML = 'Ingresar un telefono valido';
-            document.getElementById('telefono').classList.add('error');
+          valido = false;
+          error.innerHTML = 'Ingresar un telefono valido';
+          document.getElementById('telefono').classList.add('error');
         }
         if(!verificarEmail(email))
         {
-            valido = false;
-            error.innerHTML = 'Ingresar un email valido';
-            document.getElementById('email').classList.add('error');
+          valido = false;
+          error.innerHTML = 'Ingresar un email valido';
+          document.getElementById('email').classList.add('error');
         }
         if(valido)
         {
-            let usuario = {
-                nombre: nombre,
-                apellido: apellido,
-                direccion: direccion,
-                telefono: telefono,
-                fecha_nacimiento: fecha_nacimiento,
-                email: email
-            }
-            subirDatos(usuario);
+          //Si estan todos los campos bien, se crea un objeto con los valores
+          let usuario = {
+            nombre: nombre,
+            apellido: apellido,
+            direccion: direccion,
+            telefono: telefono,
+            fecha_nacimiento: fecha_nacimiento,
+            email: email
+          }
+          subirDatos(usuario);//Y se envia a la funcion que fue pasada por parametro
         }
     }
 
+    //Se utiliza un regex para verificar que el telefono cumpla con los requisitos
     function verificarEmail(email)//True si es valido
     {
-        let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-        return emailRegex.test(email);
+      let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+      return emailRegex.test(email);
     }
 
     function verificarTelef(tel)//True si es valido
     {
-        //Utiliza un regex para verificar que el telefono cumpla con los requisitos
-        let telRegex = /^(\d{3}[-\s]?\d{3}[-\s]?\d{4})$/;
-        return telRegex.test(tel);
+      let telRegex = /^(\d{3}[-\s]?\d{3}[-\s]?\d{4})$/;
+      return telRegex.test(tel);
     }
 
-    function verificarText(text)
+    function verificarText(text)//True si es valido
     {
-        let textRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s']+$/;
-        return textRegex.test(text);
+      let textRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s']+$/;
+      return textRegex.test(text);
     }
 
-    function verificarTextconNumeros(texto) 
+    function verificarTextconNumeros(texto)//True si es valido
     {
-        let regex = /^[0-9a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s']+$/;
-        return regex.test(texto);
+      let regex = /^[0-9a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s']+$/;
+      return regex.test(texto);
     }
-
+    //Vuelve a la pestaña de inicio
     function volver()
     {
-        window.location.href = "/";
+      window.location.href = "/";
     }
 
     return (

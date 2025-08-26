@@ -8,6 +8,7 @@ import {leerUrl} from './leerUrl'
 
 function App() 
 {
+  //Se guarda la ifnormacion de la api local
   const [usuarios, setUsuarios] = useState([]);
   
   useEffect(() => {
@@ -29,7 +30,7 @@ function App()
       <Routes>
         <Route path="/" element={<Lista />} />
         <Route path="/creacion" element={<Creacion />} />
-        {usuarios.map(usu => {
+        {usuarios.map(usu => { //Se mapea a los usuarios y se le asigna una pestaña de detalle a cada uno
           return (
           <Route path={`/detalle/${usu.id}`} element={<Detalle usu={usu} />}/>
         )})}
