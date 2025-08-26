@@ -27,35 +27,46 @@ function Formulario({ subirDatos, datos })
         let error = document.getElementById('error');
         let valido = true;
         let nombre = document.getElementById('nombre').value;
+        document.getElementById('nombre').classList.remove('error');
         let apellido = document.getElementById('apellido').value;
+        document.getElementById('apellido').classList.remove('error');
         let direccion = document.getElementById('direccion').value;
+        document.getElementById('direccion').classList.remove('error');
         let telefono = document.getElementById('telefono').value;
+        document.getElementById('telefono').classList.remove('error');
         let fecha_nacimiento = document.getElementById('fecha').value;
         let email = document.getElementById('email').value;
+        document.getElementById('email').classList.remove('error');
+
         if(!verificarText(nombre))
         {
             valido = false;
             error.innerHTML = 'Ingresar un nombre valido';
+            document.getElementById('nombre').classList.add('error');
         }
         if(!verificarText(apellido))
         {
             valido = false;
             error.innerHTML = 'Ingresar un apellido valido';
+            document.getElementById('apellido').classList.add('error');
         }
         if(!verificarTextconNumeros(direccion))
         {
             valido = false;
             error.innerHTML = 'Ingresar una direccion valida';
+            document.getElementById('direccion').classList.add('error');
         }
         if(!verificarTelef(telefono))
         {
             valido = false;
             error.innerHTML = 'Ingresar un telefono valido';
+            document.getElementById('telefono').classList.add('error');
         }
         if(!verificarEmail(email))
         {
             valido = false;
             error.innerHTML = 'Ingresar un email valido';
+            document.getElementById('email').classList.add('error');
         }
         if(valido)
         {
@@ -96,32 +107,47 @@ function Formulario({ subirDatos, datos })
         return regex.test(texto);
     }
 
+    function volver()
+    {
+        window.location.href = "/";
+    }
+
     return (
-        <div>
-            <form onSubmit={validar}>
-                <label>Nombre</label> 
-                <input type="text" id="nombre" required defaultValue={defaultValues.nombre}/>
-                <br />
-                <label>Apellido</label> 
-                <input type="text" id="apellido" required defaultValue={defaultValues.apellido}/>
-                <br />
-                <label>Direccion</label> 
-                <input type="text" id="direccion" required defaultValue={defaultValues.direccion}/>
-                <br />
-                <label>Telefono</label> 
-                <input type="tel" id="telefono" required defaultValue={defaultValues.telefono}/>
-                <br />
-                <label>Fecha de Nacimiento</label> 
-                <input type="date" id="fecha" required defaultValue={defaultValues.fecha_nacimiento}/>
-                <br />
-                <label>Email</label> 
-                <input type="email" id="email" required defaultValue={defaultValues.email}/>
-                <br />
-                <button type="submit">Guardar</button>
-            </form>
-            <div id="error"></div>
+        <div className="container mx-auto p-6 max-w-lg">
+          <form onSubmit={validar} className="bg-white shadow-md rounded-2xl p-8 space-y-6 border border-gray-200">
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">Nombre</label>
+              <input type="text" id="nombre" required defaultValue={defaultValues.nombre} className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"/>
+            </div>
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">Apellido</label>
+              <input type="text" id="apellido" required defaultValue={defaultValues.apellido} className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"/>
+            </div>
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">Dirección</label>
+              <input type="text" id="direccion" required defaultValue={defaultValues.direccion} className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"/>
+            </div>
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">Teléfono</label>
+              <input type="tel" id="telefono" required defaultValue={defaultValues.telefono} className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"/>
+            </div>
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">Fecha de Nacimiento</label>
+              <input type="date" id="fecha" required defaultValue={defaultValues.fecha_nacimiento} className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"/>
+            </div>
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">Email</label>
+              <input type="email" id="email" required defaultValue={defaultValues.email} className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"/>
+            </div>
+            <div className="flex justify-between items-center pt-4">
+              <button type="button" onClick={volver} className="px-4 py-2 rounded-lg border border-gray-400 text-gray-700 hover:bg-gray-100 transition-colors">Volver sin Guardar</button>
+              <button type="submit" className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition-colors">Guardar</button>
+            </div>
+            <div id="error" className="text-red-600 mt-4"></div>
+          </form>
         </div>
-    );
+      );
+      
 }
 
 export default Formulario

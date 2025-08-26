@@ -1,5 +1,6 @@
-.usuario
+@import "tailwindcss";
+
+.error
 {
-    line-height: 0.1;
-    padding-bottom: 20px;
+    border: 2px red solid;
 }

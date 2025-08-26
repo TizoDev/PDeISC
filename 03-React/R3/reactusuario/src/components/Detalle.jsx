@@ -32,7 +32,9 @@ function Detalle({usu})
 
     return (
         <div>
-            <button onClick={eliminar}>Eliminar Usuario</button>
+            <div className="flex justify-start mb-6">
+                <button onClick={eliminar} className="px-5 py-2 bg-red-600 text-white font-medium rounded-lg shadow hover:bg-red-700 transition-colors">Eliminar Usuario</button>
+            </div> 
             <Formulario subirDatos={guardar} datos={{modo:"editar", usuario: usu}}/>
         </div>
       );
