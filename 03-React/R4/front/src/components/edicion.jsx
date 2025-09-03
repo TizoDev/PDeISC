@@ -42,7 +42,7 @@ function Edicion()
     if(fondo) formData.append("fondo", fondo);
     if(perfil) formData.append("perfil", perfil);
 
-    fetch("https://tizodevgithubio-production.up.railway.app/modPortafolio", {
+    fetch("https://tizodevgithubio-production.up.railway.app/api/modPortafolio", {
       method: "POST",
       body: formData
     });
