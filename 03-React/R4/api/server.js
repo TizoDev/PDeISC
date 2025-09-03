@@ -24,7 +24,7 @@ const storage = diskStorage({
 
 const upload = multer({ storage });
 
-app.post('/inicioSesion', async function(req,res){
+app.post('/api/inicioSesion', async function(req,res){
     const { nombre, password } = req.body;
     console.log(nombre);
     await registroCorrecto(nombre, password)
@@ -39,20 +39,20 @@ app.post('/inicioSesion', async function(req,res){
     .catch(err => res.status(500).send(err));
 });
 
-app.post('/modProyecto', upload.single("imagen"), async function(req,res){
+app.post('/api/modProyecto', upload.single("imagen"), async function(req,res){
     const { id, titulo, descripcion } = req.body;
     const imagen = req.file ? `/imagenes/${req.file.filename}` : null;
     if(imagen != null) await updateProyecto(id, titulo, descripcion, imagen);
     else await updateProyectosinImagen(id, titulo, descripcion);
 });
 
-app.post('/addProyecto', upload.single("imagen"), async function(req,res){
+app.post('/api/addProyecto', upload.single("imagen"), async function(req,res){
     const { titulo, descripcion } = req.body;
     const imagen = req.file ? `/imagenes/${req.file.filename}` : null;
     await insertInto(titulo, descripcion, imagen);
 });
 
-app.post('/modPortafolio', upload.fields([
+app.post('/api/modPortafolio', upload.fields([
     { name: "fondo", maxCount: 1 },
     { name: "perfil", maxCount: 1 }
   ]), async (req, res) => {
@@ -63,7 +63,7 @@ app.post('/modPortafolio', upload.fields([
     await updatePortafolio(titulo, subtitulo, sobre_mi, experiencia, fondo_imagen, perfil_imagen);
 });
 
-app.post('/delProyecto', async function(req,res){
+app.post('/api/delProyecto', async function(req,res){
     const { id } = req.body; //Valores del usuario
     await deleteProyecto(id)
     .then(async result => {
