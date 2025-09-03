@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root 
+{
+    --color-bg: #284351;
+    --color-card: #284351;
+    --color-primary: #358CA5;
+    --color-accent: #FFB347;
+    --color-text: #F5F7FA;
+    --color-muted: #D1D8DE;
+
+    --back-image: url("/vite.svg");
+}
+
+.false
+{
+    display:none;
+}
+ 
+.header 
+{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    background: var(--color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    z-index: 1000;
+}
+
+.nav-link 
+{
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    padding: 5px 0;
+}
+  
+.nav-link:hover 
+{
+    color: var(--color-accent);
+    border-bottom: 2px solid var(--color-accent);
+}
+
+@media (max-width: 768px) 
+{
+    .header 
+    {
+        gap: 20px;
+        font-size: 0.95rem;
+    }
+}
+  
