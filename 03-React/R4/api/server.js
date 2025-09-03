@@ -84,8 +84,4 @@ app.get('/api/portafolio', async (req, res) => {
     res.json(usu);
 });
 
-
-//Iniciando el servidor
-app.listen(port, () => {
-    console.log(`Listening on http://localhost:${port}`);
-});
+export default app;
