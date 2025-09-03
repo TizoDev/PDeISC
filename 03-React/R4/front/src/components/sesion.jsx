@@ -7,7 +7,7 @@ function Sesion()
     e.preventDefault();
     let nombre = document.getElementById("nombre").value;
     let password = document.getElementById("password").value;
-    fetch('http://localhost:8081/inicioSesion',{
+    fetch('https://tizodevgithubio-production.up.railway.app/inicioSesion',{
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre, password })
