@@ -7,7 +7,7 @@ import { getRows, registroCorrecto, insertInto, updateProyecto, updatePortafolio
 import cors from 'cors';
 
 const app = express();
-const port = 8081; //Puerto asignado
+const port = process.env.PORT || 8081;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
