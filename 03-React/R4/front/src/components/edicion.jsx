@@ -41,7 +41,7 @@ function Edicion()
     if(fondo) formData.append("fondo", fondo);
     if(perfil) formData.append("perfil", perfil);
 
-    fetch("https://serverportafolio.vercel.app/modPortafolio", {
+    fetch("https://serverportafolio.vercel.app/api/modPortafolio", {
       method: "POST",
       body: formData
     });

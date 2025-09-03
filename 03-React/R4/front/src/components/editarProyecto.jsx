@@ -16,7 +16,7 @@ function Editar({pro})
     formData.append("descripcion", descripcion);
     formData.append("imagen", imagen);
 
-    fetch('https://serverportafolio.vercel.app/modProyecto', {
+    fetch('https://serverportafolio.vercel.app/api/modProyecto', {
       method: 'POST',
       body: formData
     });
