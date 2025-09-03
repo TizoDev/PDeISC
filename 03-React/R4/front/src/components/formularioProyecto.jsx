@@ -1,4 +1,5 @@
 import '../styles/edicion.css'
+import axios from 'axios';
 
 function FormProyecto({ subirDatos, datos }) 
 {
@@ -24,15 +25,13 @@ function FormProyecto({ subirDatos, datos })
       subirDatos({titulo, descripcion, imagen})
     }
 
-    function eliminar()
+    async function eliminar()
     {
       const seguro = window.confirm("¿Estás seguro de querer borrar el proyecto?");
       if (!seguro) return;
       let id = datos.proyecto.id;
-        fetch('https://tizodevgithubio-production.up.railway.app/api/delProyecto',{
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id })
+        await axios.post("https://tizodevgithubio-production.up.railway.app/api/delProyecto", {
+          id: id
         });
         //Una vez eliminado vuelve al inicio
         window.location.href = "/";
