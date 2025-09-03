@@ -3,7 +3,7 @@ import express from 'express';
 import multer, { diskStorage } from 'multer';
 import path, { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { getRows, registroCorrecto, insertInto, updateProyecto, updatePortafolio, deleteProyecto } from './funcionesbd.js';
+import { getRows, registroCorrecto, insertInto, updateProyecto, updatePortafolio, deleteProyecto, updateProyectosinImagen } from './funcionesbd.js';
 import cors from 'cors';
 
 const app = express();
