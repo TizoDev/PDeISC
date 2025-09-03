@@ -18,7 +18,9 @@ function Inicio()
       leerUrl('https://serverportafolio.vercel.app/api/portafolio')
         .then(data => {
           setPortafolio(data);
-          document.documentElement.style.setProperty('--back-image', `url("https://serverportafolio.vercel.app${data[0].fondo_imagen}")`);
+          if (data[0].fondo_imagen) document.documentElement.style.setProperty('--back-image', `url("https://serverportafolio.vercel.app${data[0].fondo_imagen}")`);
+          else document.documentElement.style.setProperty('--back-image', `url("/vite.svg")`);
+        
         })
   }, []);
 
