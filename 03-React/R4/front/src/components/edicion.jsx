@@ -42,8 +42,9 @@ function Edicion()
     if(fondo) formData.append("fondo", fondo);
     if(perfil) formData.append("perfil", perfil);
 
-    await axios.post("https://tizodevgithubio-production.up.railway.app/api/modPortafolio", formData, {
-      headers: { "Content-Type": "multipart/form-data" }
+    fetch("http://localhost:8081/modPortafolio", {
+      method: "POST",
+      body: formData
     });
 
     window.location.href = "/";
