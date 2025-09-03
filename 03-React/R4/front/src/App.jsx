@@ -15,7 +15,7 @@ function App()
   const [proyectos, setProyectos] = useState([]);
 
   useEffect(() => {
-      leerUrl('http://localhost:8081/api/proyectos')
+      leerUrl('https://serverportafolio.vercel.app/api/proyectos')
         .then(data => setProyectos(data))
     }, []);
 

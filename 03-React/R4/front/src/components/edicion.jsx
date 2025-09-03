@@ -13,7 +13,7 @@ function Edicion()
         experiencia: 'Cargando'
       }]);
    useEffect(() => {
-      leerUrl('http://localhost:8081/api/portafolio')
+      leerUrl('https://serverportafolio.vercel.app/api/portafolio')
       .then(data => {
         setPortafolio(data);
         document.getElementById('titulo').value = data[0].titulo;
@@ -41,7 +41,7 @@ function Edicion()
     if(fondo) formData.append("fondo", fondo);
     if(perfil) formData.append("perfil", perfil);
 
-    fetch("http://localhost:8081/modPortafolio", {
+    fetch("https://serverportafolio.vercel.app/modPortafolio", {
       method: "POST",
       body: formData
     });

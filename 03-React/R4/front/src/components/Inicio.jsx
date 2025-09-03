@@ -15,15 +15,15 @@ function Inicio()
   
   const [proyectos, setProyectos] = useState([]);
   useEffect(() => {
-      leerUrl('http://localhost:8081/api/portafolio')
+      leerUrl('https://serverportafolio.vercel.app/api/portafolio')
         .then(data => {
           setPortafolio(data);
-          document.documentElement.style.setProperty('--back-image', `url("http://localhost:8081${data[0].fondo_imagen}")`);
+          document.documentElement.style.setProperty('--back-image', `url("https://serverportafolio.vercel.app${data[0].fondo_imagen}")`);
         })
   }, []);
 
   useEffect(() => {
-    leerUrl('http://localhost:8081/api/proyectos')
+    leerUrl('https://serverportafolio.vercel.app/api/proyectos')
       .then(data => setProyectos(data))
   }, []);
 
@@ -47,7 +47,7 @@ function Inicio()
               <p id='parrafo1' className='parrafo'>{portafolio[0].sobre_mi}</p>
             </div>
             <div className="sobre-foto">
-              <img src={`http://localhost:8081${portafolio[0].perfil_imagen}`}/>
+              <img src={`https://serverportafolio.vercel.app${portafolio[0].perfil_imagen}`}/>
             </div>
           </div>
         </div>

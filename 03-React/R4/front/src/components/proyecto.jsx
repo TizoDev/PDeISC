@@ -10,7 +10,7 @@ function Proyecto({id, titulo, descripcion, imagen})
 
   return (
     <div className="proyecto">
-        <img id="imagen" alt="Proyecto 1" src={`http://localhost:8081${imagen}`}/>
+        <img id="imagen" alt="Proyecto 1" src={`https://serverportafolio.vercel.app${imagen}`}/>
         <h3 id="titulo">{titulo}</h3>
         <p id="descripcion">{descripcion}</p>
         <button className={`nav-link ${sesionIniciada}`} onClick={enviar}>Editar Proyecto</button>

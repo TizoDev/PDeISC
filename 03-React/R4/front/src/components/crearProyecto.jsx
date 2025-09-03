@@ -14,7 +14,7 @@ function Crear()
     formData.append("descripcion", descripcion);
     formData.append("imagen", imagen);
 
-    fetch('http://localhost:8081/addProyecto', {
+    fetch('https://serverportafolio.vercel.app/addProyecto', {
       method: 'POST',
       body: formData
     });
