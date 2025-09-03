@@ -100,7 +100,7 @@ app.post('/api/modPortafolio', upload.fields([
     const { titulo, subtitulo, sobre_mi, experiencia } = req.body;
 
     const fondoFile = req.files?.['fondo']?.[0]?.filename;
-    const perfilFile = reqfiles?.['perfil']?.[0]?.filename; // <-- corregir typo si lo pegas: req.files
+    const perfilFile = reqfiles?.['perfil']?.[0]?.filename;
 
     const fondo_imagen = fondoFile ? publicUrl(req, fondoFile) : "/react.svg";;
     const perfil_imagen = perfilFile ? publicUrl(req, perfilFile) : "/react.svg";;

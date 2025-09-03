@@ -1,16 +1,16 @@
 import '../styles/sesion.css'
-import axios from 'axios';
 
 function Sesion() 
 {
-  async function iniciarSesion(e)
+  function iniciarSesion(e)
   {
     e.preventDefault();
     let nombre = document.getElementById("nombre").value;
     let password = document.getElementById("password").value;
-    await axios.post("https://tizodevgithubio-production.up.railway.app/api/inicioSesion", {
-      nombre,
-      password
+    fetch('http://localhost:8081/inicioSesion',{
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, password })
     })
     .then(response => response.json())
     .then(data => {
