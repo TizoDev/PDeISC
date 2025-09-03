@@ -3,7 +3,7 @@ import express from 'express';
 import multer, { diskStorage } from 'multer';
 import path, { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { getRows, registroCorrecto, insertInto, updateProyecto, updatePortafolio, deleteProyecto, updateProyectosinImagen, updatePortafolioSinImagenes } from './funcionesbd.js';
+import { getRows, registroCorrecto, insertInto, updateProyecto, updatePortafolio, deleteProyecto, updateProyectosinImagen, updatePortafolioSinImagenes, insertIntoSinImagen } from './funcionesbd.js';
 import cors from 'cors';
 
 const app = express();
@@ -49,7 +49,8 @@ app.post('/api/modProyecto', upload.single("imagen"), async function(req,res){
 app.post('/api/addProyecto', upload.single("imagen"), async function(req,res){
     const { titulo, descripcion } = req.body;
     const imagen = req.file ? `/imagenes/${req.file.filename}` : null;
-    await insertInto(titulo, descripcion, imagen);
+    if(imagen != null) await insertInto(titulo, descripcion, imagen);
+    else await insertIntoSinImagen(titulo, descripcion);
 });
 
 app.post('/api/modPortafolio', upload.fields([
@@ -66,11 +67,7 @@ app.post('/api/modPortafolio', upload.fields([
 
 app.post('/api/delProyecto', async function(req,res){
     const { id } = req.body; //Valores del usuario
-    await deleteProyecto(id)
-    .then(async result => {
-        res.send(result);
-    })
-    .catch(err => res.status(500).send(err));
+    await deleteProyecto(id);
 });
 
 //Api que guarda los valores de todos los proyectos

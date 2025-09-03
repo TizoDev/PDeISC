@@ -42,6 +42,19 @@ export async function insertInto(titulo, descripcion, imagen) {
   }
 }
 
+export async function insertIntoSinImagen(titulo, descripcion) {
+  const db = await connectBD();
+  if (!db) return;
+  try {
+    const sql =
+      'INSERT INTO proyectos (titulo, descripcion, imagen) VALUES ($1, $2, $3) RETURNING *';
+    const result = await db.query(sql, [titulo, descripcion, '']);
+    return result.rows[0];
+  } finally {
+    await db.end();
+  }
+}
+
 export async function updateProyecto(id, titulo, descripcion, imagen) {
   const db = await connectBD();
   if (!db) return;
