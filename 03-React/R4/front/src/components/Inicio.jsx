@@ -15,17 +15,17 @@ function Inicio()
   
   const [proyectos, setProyectos] = useState([]);
   useEffect(() => {
-      leerUrl('https://serverportafolio.vercel.app/api/portafolio')
+      leerUrl('https://tizodevgithubio-production.up.railway.app/api/portafolio')
         .then(data => {
           setPortafolio(data);
-          if (data[0].fondo_imagen) document.documentElement.style.setProperty('--back-image', `url("https://serverportafolio.vercel.app${data[0].fondo_imagen}")`);
+          if (data[0].fondo_imagen) document.documentElement.style.setProperty('--back-image', `url("https://tizodevgithubio-production.up.railway.app${data[0].fondo_imagen}")`);
           else document.documentElement.style.setProperty('--back-image', `url("/vite.svg")`);
         
         })
   }, []);
 
   useEffect(() => {
-    leerUrl('https://serverportafolio.vercel.app/api/proyectos')
+    leerUrl('https://tizodevgithubio-production.up.railway.app/api/proyectos')
       .then(data => setProyectos(data))
   }, []);
 
@@ -49,7 +49,7 @@ function Inicio()
               <p id='parrafo1' className='parrafo'>{portafolio[0].sobre_mi}</p>
             </div>
             <div className="sobre-foto">
-              <img src={`https://serverportafolio.vercel.app${portafolio[0].perfil_imagen}`}/>
+              <img src={`https://tizodevgithubio-production.up.railway.app${portafolio[0].perfil_imagen}`}/>
             </div>
           </div>
         </div>

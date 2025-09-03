@@ -13,7 +13,7 @@ function Edicion()
         experiencia: 'Cargando'
       }]);
    useEffect(() => {
-      leerUrl('https://serverportafolio.vercel.app/api/portafolio')
+      leerUrl('https://tizodevgithubio-production.up.railway.app/api/portafolio')
       .then(data => {
         setPortafolio(data);
         document.getElementById('titulo').value = data[0].titulo;
@@ -41,7 +41,7 @@ function Edicion()
     if(fondo) formData.append("fondo", fondo);
     if(perfil) formData.append("perfil", perfil);
 
-    fetch("https://serverportafolio.vercel.app/api/modPortafolio", {
+    fetch("https://tizodevgithubio-production.up.railway.app/api/modPortafolio", {
       method: "POST",
       body: formData
     });

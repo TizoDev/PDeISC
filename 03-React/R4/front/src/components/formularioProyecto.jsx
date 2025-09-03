@@ -29,7 +29,7 @@ function FormProyecto({ subirDatos, datos })
       const seguro = window.confirm("¿Estás seguro de querer borrar el proyecto?");
       if (!seguro) return;
       let id = datos.proyecto.id;
-        fetch('https://serverportafolio.vercel.app/api/delProyecto',{
+        fetch('https://tizodevgithubio-production.up.railway.app/api/delProyecto',{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id })
