@@ -3,7 +3,7 @@ import express from 'express';
 import multer, { diskStorage } from 'multer';
 import path, { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { getRows, registroCorrecto, insertInto, updateProyecto, updatePortafolio, deleteProyecto, updateProyectosinImagen } from './funcionesbd.js';
+import { getRows, registroCorrecto, insertInto, updateProyecto, updatePortafolio, deleteProyecto, updateProyectosinImagen, updatePortafolioSinImagenes } from './funcionesbd.js';
 import cors from 'cors';
 
 const app = express();
@@ -60,7 +60,8 @@ app.post('/api/modPortafolio', upload.fields([
     const fondo_imagen = req.files["fondo"] ? `/imagenes/${req.files["fondo"][0].filename}` : null;
     const perfil_imagen = req.files["perfil"] ? `/imagenes/${req.files["perfil"][0].filename}` : null;
   
-    await updatePortafolio(titulo, subtitulo, sobre_mi, experiencia, fondo_imagen, perfil_imagen);
+    if(fondo_imagen != null && perfil_imagen!= null) await updatePortafolio(titulo, subtitulo, sobre_mi, experiencia, fondo_imagen, perfil_imagen);
+    else await updatePortafolioSinImagenes(titulo, subtitulo, sobre_mi, experiencia);
 });
 
 app.post('/api/delProyecto', async function(req,res){
@@ -84,4 +85,8 @@ app.get('/api/portafolio', async (req, res) => {
     res.json(usu);
 });
 
-export default app;
+
+//Iniciando el servidor
+app.listen(port, () => {
+    console.log(`Listening on http://localhost:${port}`);
+});
