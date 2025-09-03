@@ -1,6 +1,7 @@
 import '../styles/edicion.css'
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { leerUrl } from '../leerUrl.js';
 
 function Edicion() 
@@ -23,7 +24,7 @@ function Edicion()
       })
     }, []);
 
-  function guardar(e)
+  async function guardar(e)
   {
     e.preventDefault();
     let titulo = document.getElementById('titulo').value;
@@ -41,9 +42,8 @@ function Edicion()
     if(fondo) formData.append("fondo", fondo);
     if(perfil) formData.append("perfil", perfil);
 
-    fetch("https://tizodevgithubio-production.up.railway.app/api/modPortafolio", {
-      method: "POST",
-      body: formData
+    await axios.post("https://tizodevgithubio-production.up.railway.app/api/modPortafolio", formData, {
+      headers: { "Content-Type": "multipart/form-data" }
     });
 
     window.location.href = "/";

@@ -1,9 +1,10 @@
 import FormProyecto from "./formularioProyecto";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Crear() 
 {
-  function addProyecto(proyecto)
+  async function addProyecto(proyecto)
   {
     let titulo = proyecto.titulo;
     let descripcion = proyecto.descripcion;
@@ -14,9 +15,8 @@ function Crear()
     formData.append("descripcion", descripcion);
     formData.append("imagen", imagen);
 
-    fetch('https://tizodevgithubio-production.up.railway.app/api/addProyecto', {
-      method: 'POST',
-      body: formData
+    await axios.post("https://tizodevgithubio-production.up.railway.app/api/addProyecto", formData, {
+      headers: { "Content-Type": "multipart/form-data" }
     });
     //Luego vuelve al inicio para que se vean los cambios
     window.location.href = "/";
