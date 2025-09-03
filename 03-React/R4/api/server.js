@@ -4,12 +4,14 @@ import multer, { diskStorage } from 'multer';
 import path, { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { getRows, registroCorrecto, insertInto, updateProyecto, updatePortafolio, deleteProyecto, updateProyectosinImagen } from './funcionesbd.js';
+import cors from 'cors';
 
 const app = express();
 const port = 8081; //Puerto asignado
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+app.use(cors()); //Se utiliza Cors para que se puedan hacer llamados a la API desde el LocalHost
 //Le indicamos a app que utilize la carpeta de public
 app.use(express.static(join(__dirname, 'public')));
 app.use('/imagenes', express.static(join(__dirname, 'imagenes')));
