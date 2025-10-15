@@ -151,69 +151,72 @@ async function editInto(nombre, password, mail, telefono, direccion, foto, oldma
 
 app.post('/googleLogin', express.json(), async (req, res) => {
     const { idToken, accessToken } = req.body;
+    try 
+    {
+        let email, name, picture;
   
-    try {
-      let email, name, picture;
-  
-      if (idToken) {
-        // 🔹 Flujo móvil: validar con verifyIdToken
-        const ticket = await client.verifyIdToken({
-          idToken,
-          audience: ["204903815937-mphcir1er2shc5125248ffvanr66r8dr.apps.googleusercontent.com", "04903815937-3lf0nukl1hg9t1pj3f819bjl9c5r5coi.apps.googleusercontent.com"],
-        });
-        const payload = ticket.getPayload();
-        email = payload.email;
-        name = payload.name;
-        picture = payload.picture;
-      } 
-      else if (accessToken) {
-        // 🔹 Flujo web: obtener datos desde userinfo
-        const userInfoRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        });
-        const userInfo = await userInfoRes.json();
-        email = userInfo.email;
-        name = userInfo.name;
-        picture = userInfo.picture;
-      } 
-      else {
-        return res.json({ success: false, message: 'Token faltante' });
-      }
-  
-      // 🔹 Crear usuario si no existe
-      const db = await connectBD();
-      const [existing] = await db.execute('SELECT * FROM usuarios WHERE mail=?', [email]);
-  
-      let localImagePath = '';
-  
-      if (existing.length === 0) {
-        // 🔸 Descargar la imagen de perfil de Google y guardarla localmente
-        if (picture) {
-          const response = await fetch(picture);
-          const buffer = await response.arrayBuffer();
-          const filename = `${Date.now()}-${Math.round(Math.random() * 1e9)}.jpg`;
-          const imagePath = path.join(uploadPath, filename);
-  
-          fs.writeFileSync(imagePath, Buffer.from(buffer));
-          console.log(`✅ Imagen de Google guardada en ${imagePath}`);
-  
-          // Guardar ruta relativa para la BD (como el resto de tus imágenes)
-          localImagePath = `./uploads/${filename}`;
+        if(idToken) 
+        {
+            const ticket = await client.verifyIdToken({
+                idToken,
+                audience: ["204903815937-mphcir1er2shc5125248ffvanr66r8dr.apps.googleusercontent.com", "04903815937-3lf0nukl1hg9t1pj3f819bjl9c5r5coi.apps.googleusercontent.com"],
+            });
+            const payload = ticket.getPayload();
+            email = payload.email;
+            name = payload.name;
+            picture = payload.picture;
+        } 
+        else if(accessToken) 
+        {
+            const userInfoRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                headers: { Authorization: `Bearer ${accessToken}` },
+            });
+            const userInfo = await userInfoRes.json();
+            email = userInfo.email;
+            name = userInfo.name;
+            picture = userInfo.picture;
+        } 
+        else 
+        {
+            return res.json({ success: false, message: 'Token faltante' });
         }
   
-        const sql = 'INSERT INTO usuarios (nombre, password, mail, telefono, direccion, foto, isGoogleUser) VALUES (?, ?, ?, ?, ?, ?, ?)';
-        await db.execute(sql, [name, '', email, '', '', localImagePath, true]);
-        console.log(`🧩 Usuario Google creado: ${email}`);
-      } else {
-        console.log(`ℹ️ Usuario Google ya existe: ${email}`);
-      }
+        const db = await connectBD();
+        const [existing] = await db.execute('SELECT * FROM usuarios WHERE mail=?', [email]);
   
-      res.json({ success: true, mail: email });
-    } catch (error) {
+        let localImagePath = '';
+  
+        if(existing.length === 0) 
+        {
+            if(picture) 
+            {
+                const response = await fetch(picture);
+                const buffer = await response.arrayBuffer();
+                const filename = `${Date.now()}-${Math.round(Math.random() * 1e9)}.jpg`;
+                const imagePath = path.join(uploadPath, filename);
+  
+                fs.writeFileSync(imagePath, Buffer.from(buffer));
+                console.log(`Imagen de Google guardada en ${imagePath}`);
+  
+                localImagePath = `./uploads/${filename}`;
+            }
+  
+            const sql = 'INSERT INTO usuarios (nombre, password, mail, telefono, direccion, foto, isGoogleUser) VALUES (?, ?, ?, ?, ?, ?, ?)';
+            await db.execute(sql, [name, '', email, '', '', localImagePath, true]);
+            console.log(`Usuario Google creado: ${email}`);
+        } 
+        else 
+        {
+            console.log(`Usuario Google ya existe: ${email}`);
+        }
+        res.json({ success: true, mail: email });
+    } 
+    catch (error) 
+    {
       console.error('Error en Google Login:', error);
       res.json({ success: false, error: error.message });
     }
-  });
+});
   
 
 app.post('/editUsuario', upload.single('image'), async function(req,res){
