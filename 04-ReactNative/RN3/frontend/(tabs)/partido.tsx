@@ -1,19 +1,20 @@
 import HeaderReact from '@/components/header';
+import SelectorEquipo from '@/components/seleccionequipo';
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 export default function Partido()
 {
-    const [opcion1, setOpcion1] = useState('');
-    const [opcion2, setOpcion2] = useState('');
+    const [opcion1, setOpcion1] = useState(0);
+    const [opcion2, setOpcion2] = useState(0);
     const [fecha, setFecha] = useState(new Date());
-    const [mostrarPicker, setMostrarPicker] = useState(false);
     
     return (
         <View style={styles.screen}>
             <HeaderReact />
             <View>
-                
+                <SelectorEquipo sendData={setOpcion1}/>
+                <SelectorEquipo sendData={setOpcion2}/>
                 <Pressable style={styles.botonmin}>
                     <Text style={styles.subtitulo}>Crear Partido</Text>
                 </Pressable>

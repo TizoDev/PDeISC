@@ -24,7 +24,7 @@ export default function HeaderReact()
         <Text style={styles.texto}>Inicio</Text>
       </Pressable>
 
-      {tipousuario != '0' && tipousuario != '' ? (
+      {tipousuario != '0' && tipousuario != '' && tipousuario != '3' ? (
         <Pressable style={styles.enlace} onPress={() => { router.push({
             pathname: "/profile",
             params: { id: idusuario, tipo: tipousuario },}); }}>

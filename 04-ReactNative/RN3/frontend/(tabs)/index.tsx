@@ -19,13 +19,13 @@ export default function HomeScreen()
     (async() => {
       setMail(await SecureStore.getItemAsync('email') as any || '');
     })();
-    fetch('http://192.168.0.143:3031/getJugadores')
+    fetch('http://10.0.6.128:3031/getJugadores')
       .then(response => response.json())
       .then(data => setJugadores(data));
-    fetch('http://192.168.0.143:3031/getDirectores')
+    fetch('http://10.0.6.128:3031/getDirectores')
       .then(response => response.json())
       .then(data => setDirectores(data));
-    fetch('http://192.168.0.143:3031/getEquipos')
+    fetch('http://10.0.6.128:3031/getEquipos')
       .then(response => response.json())
       .then(data => setEquipos(data));
   }, [])
@@ -36,22 +36,21 @@ export default function HomeScreen()
 
       <Text style={styles.sectionTitle}>Jugadores</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.carousel}>
-        {jugadores.map((item) => (
+        {jugadores.map((item, index) => (
           <View style={styles.card} key={item.id}>
-            <Image
-              style={styles.imagen}
-              source={{ uri: 'http://192.168.0.143:3031' + item.imagen }}
-            />
-            <Text style={styles.nombre}>{item.nombre} {item.apellido}</Text>
             <Pressable
-              style={styles.boton}
+              key={index}
               onPress={() => {
                 router.push({
                   pathname: "/profile",
                   params: { id: item.id, tipo: 1 },
                 });
               }}>
-              <Text style={styles.botonTexto}>Más información</Text>
+            <Image
+              style={styles.imagen}
+              source={{ uri: 'http://10.0.6.128:3031' + item.imagen }}
+            />
+            <Text style={styles.nombre}>{item.nombre} {item.apellido}</Text>
             </Pressable>
           </View>
         ))}
@@ -59,22 +58,21 @@ export default function HomeScreen()
 
       <Text style={styles.sectionTitle}>Directores Técnicos</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.carousel}>
-        {directores.map((item) => (
+        {directores.map((item, index) => (
           <View style={styles.card} key={item.id}>
-            <Image
-              style={styles.imagen}
-              source={{ uri: 'http://192.168.0.143:3031' + item.imagen }}
-            />
-            <Text style={styles.nombre}>{item.nombre} {item.apellido}</Text>
             <Pressable
-              style={styles.boton}
+              key={index}
               onPress={() => {
                 router.push({
                   pathname: "/profile",
                   params: { id: item.id, tipo: 2 },
                 });
               }}>
-              <Text style={styles.botonTexto}>Más información</Text>
+            <Image
+              style={styles.imagen}
+              source={{ uri: 'http://10.0.6.128:3031' + item.imagen }}
+            />
+            <Text style={styles.nombre}>{item.nombre} {item.apellido}</Text>
             </Pressable>
           </View>
         ))}
@@ -82,22 +80,21 @@ export default function HomeScreen()
 
       <Text style={styles.sectionTitle}>Equipos</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.carousel}>
-        {equipos.map((item) => (
+        {equipos.map((item, index) => (
           <View style={styles.card} key={item.id}>
-            <Image
-              style={styles.imagen}
-              source={{ uri: 'http://192.168.0.143:3031' + item.escudo }}
-            />
-            <Text style={styles.nombre}>{item.nombre}</Text>
             <Pressable
-              style={styles.boton}
+              key={index}
               onPress={() => {
                 router.push({
                   pathname: "/profile",
                   params: { id: item.id, tipo: 3 },
                 });
               }}>
-              <Text style={styles.botonTexto}>Más información</Text>
+            <Image
+              style={styles.imagen}
+              source={{ uri: 'http://10.0.6.128:3031' + item.escudo }}
+            />
+            <Text style={styles.nombre}>{item.nombre}</Text>
             </Pressable>
           </View>
         ))}

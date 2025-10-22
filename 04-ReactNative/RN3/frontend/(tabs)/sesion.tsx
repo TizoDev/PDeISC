@@ -31,7 +31,7 @@ export default function sesion()
 
   async function saveUsuario(altemail : string)
   {
-    let respuesta = await fetch('http://192.168.0.143:3031/getUsuarioData', {
+    let respuesta = await fetch('http://10.0.6.128:3031/getUsuarioData', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({email: (emailusu == '' ? altemail : emailusu)}),
@@ -58,7 +58,7 @@ export default function sesion()
         const { email } = user;
         setEmail(email);
         
-        let res = await fetch('http://192.168.0.143:3031/login', {
+        let res = await fetch('http://10.0.6.128:3031/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({email: email, password: '', isGoogleUser: 'true'}),
@@ -66,7 +66,7 @@ export default function sesion()
         let data = await res.json();
         if(data == false)
         {
-          res = await fetch('http://192.168.0.143:3031/addUsuario', {
+          res = await fetch('http://10.0.6.128:3031/addUsuario', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({email: email, password: '', isGoogleUser: 'true'}),
@@ -112,7 +112,7 @@ export default function sesion()
     setError('');
     if(!validar()) return;
     
-    let res = await fetch('http://192.168.0.143:3031/login', {
+    let res = await fetch('http://10.0.6.128:3031/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({email: emailusu, password: password, isGoogleUser: 'false'}),
@@ -139,7 +139,7 @@ export default function sesion()
       return;
     } 
     
-    let res = await fetch('http://192.168.0.143:3031/addUsuario', {
+    let res = await fetch('http://10.0.6.128:3031/addUsuario', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({email: emailusu, password: password, isGoogleUser: 'false'}),
@@ -155,7 +155,7 @@ export default function sesion()
   async function sendJugador(formData: FormData) : Promise<number>
   {
     formData.append('email', emailusu);
-    await fetch('http://192.168.0.143:3031/addJugador', {
+    await fetch('http://10.0.6.128:3031/addJugador', {
         method: 'POST',
         body: formData,
     });
@@ -167,7 +167,7 @@ export default function sesion()
   async function sendDirector(formData: FormData) : Promise<number>
   {
     formData.append('email', emailusu);
-    await fetch('http://192.168.0.143:3031/addDirector', {
+    await fetch('http://10.0.6.128:3031/addDirector', {
         method: 'POST',
         body: formData,
     });

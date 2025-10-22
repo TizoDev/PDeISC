@@ -2,6 +2,7 @@ import CameraReact from '@/components/camera';
 import * as ImagePicker from 'expo-image-picker';
 import React, { useState } from 'react';
 import { Image, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import SelectorEquipo from './seleccionequipo';
 
 export default function UserData({ sendData, inputData, tipo }:{sendData: (data: FormData) => Promise<number>, inputData: FormData, tipo: number})
 {
@@ -18,7 +19,14 @@ export default function UserData({ sendData, inputData, tipo }:{sendData: (data:
     const [imageurl, setImageurl] = useState(inputData.get('image') as any || '');
     const [posicion, setPosicion] = useState(inputData.get('posicion') as any || '');
 
+    const [idequipo, setIdequipo] = useState(0);
+
     const register = inputData.get('nombre')==null;
+
+    function setEquipo(id: number)
+    {
+      setIdequipo(id);
+    }
 
     function validar()
     {
@@ -44,6 +52,11 @@ export default function UserData({ sendData, inputData, tipo }:{sendData: (data:
         {
             valido = false;
             setError('Ingresar Foto de Perfil');
+        }
+        if(idequipo == 0)
+        {
+          valido = false;
+          setError('Seleccionar Equipo');
         }
         return valido;
     }
@@ -85,6 +98,7 @@ export default function UserData({ sendData, inputData, tipo }:{sendData: (data:
         formData.append('nombre', nombre);
         formData.append('apellido', apellido);
         if(tipo == 1) formData.append('posicion', posicion);
+        if(tipo == 1) formData.append('equipo', idequipo + '');
 
         const respuesta = await sendData(formData);
     }
@@ -115,6 +129,7 @@ export default function UserData({ sendData, inputData, tipo }:{sendData: (data:
             value={apellido}
           />
           {tipo == 1 ? (
+            <>
             <TextInput
               style={styles.input}
               placeholder="Posición"
@@ -122,6 +137,8 @@ export default function UserData({ sendData, inputData, tipo }:{sendData: (data:
               onChangeText={setPosicion}
               value={posicion}
             />
+            {register ? <SelectorEquipo sendData={setEquipo}/> : <></>}
+            </>
           ) : null}
 
           <Text style={styles.label}>Foto de Perfil</Text>

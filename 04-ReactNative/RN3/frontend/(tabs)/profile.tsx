@@ -40,7 +40,7 @@ useEffect(() => {
     })();
     if(tipo == "1")
     {
-        fetch('http://192.168.0.143:3031/getJugador', {
+        fetch('http://10.0.6.128:3031/getJugador', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({id}),
@@ -54,7 +54,7 @@ useEffect(() => {
             setGoles(data[0].goles);
             setEquipoid(data[0].equipo);
 
-            fetch('http://192.168.0.143:3031/getEquipo', {
+            fetch('http://10.0.6.128:3031/getEquipo', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({id: data[0].equipo}),
@@ -66,7 +66,7 @@ useEffect(() => {
 
             setPropio((await SecureStore.getItemAsync('tipousuario') == "1" && await SecureStore.getItemAsync('id_tablausuario') == id));
             
-            const fullImageUrl = 'http://192.168.0.143:3031' + data[0].imagen;
+            const fullImageUrl = 'http://10.0.6.128:3031' + data[0].imagen;
             try 
             {
                 const response = await fetch(fullImageUrl);
@@ -93,7 +93,7 @@ useEffect(() => {
     }
     else if(tipo == "2")
     {
-        fetch('http://192.168.0.143:3031/getDirector', {
+        fetch('http://10.0.6.128:3031/getDirector', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({id}),
@@ -106,7 +106,7 @@ useEffect(() => {
             setVictorias(data[0].victorias);
 
             setPropio((await SecureStore.getItemAsync('tipousuario') == "2" && await SecureStore.getItemAsync('id_tablausuario') == id));
-            const fullImageUrl = 'http://192.168.0.143:3031' + data[0].imagen;
+            const fullImageUrl = 'http://10.0.6.128:3031' + data[0].imagen;
             try 
             {
                 const response = await fetch(fullImageUrl);
@@ -132,7 +132,7 @@ useEffect(() => {
     }
     else
     {
-        fetch('http://192.168.0.143:3031/getEquipo', {
+        fetch('http://10.0.6.128:3031/getEquipo', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({id}),
@@ -144,7 +144,7 @@ useEffect(() => {
             setGoles(data[0].goles);
             setVictorias(data[0].victorias);
             setDirectorid(data[0].director);
-            fetch('http://192.168.0.143:3031/getDirector', {
+            fetch('http://10.0.6.128:3031/getDirector', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({id: data[0].director}),
@@ -155,7 +155,7 @@ useEffect(() => {
             });
             setPropio((await SecureStore.getItemAsync('tipousuario') == "2" && await SecureStore.getItemAsync('id_tablausuario') == data[0].director));
         });
-        fetch('http://192.168.0.143:3031/getJugadoresEquipo', {
+        fetch('http://10.0.6.128:3031/getJugadoresEquipo', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({id_equipo: id}),
@@ -167,7 +167,7 @@ useEffect(() => {
   async function anotarse()
   {
     let email = await SecureStore.getItemAsync('email');
-    fetch('http://192.168.0.143:3031/cambiarEquipo', {
+    fetch('http://10.0.6.128:3031/cambiarEquipo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({email: email, id_equipo: id}),
@@ -181,7 +181,7 @@ useEffect(() => {
     formData.append('password', password);
     formData.append('oldpassword', oldpassword);
     formData.append('isGoogleUser', 'false');
-    await fetch('http://192.168.0.143:3031/editJugador', {
+    await fetch('http://10.0.6.128:3031/editJugador', {
         method: 'POST',
         body: formData,
     }).then(response => response.json())
@@ -199,7 +199,7 @@ useEffect(() => {
     formData.append('password', password);
     formData.append('oldpassword', oldpassword);
     formData.append('isGoogleUser', 'false');
-    await fetch('http://192.168.0.143:3031/editDirector', {
+    await fetch('http://10.0.6.128:3031/editDirector', {
         method: 'POST',
         body: formData,
     }).then(response => response.json())
@@ -253,7 +253,7 @@ useEffect(() => {
       <ScrollView contentContainerStyle={styles.infoContainer}>
         <Image
           style={styles.imagen}
-          source={{ uri: 'http://192.168.0.143:3031' + imagen }}
+          source={{ uri: 'http://10.0.6.128:3031' + imagen }}
         />
         <Text style={styles.name}>{nombre} {tipo != "3" ? apellido : ''}</Text>
 
@@ -278,7 +278,7 @@ useEffect(() => {
                           <View key={item.id}>
                             <Image
                               style={styles.imagenchica}
-                              source={{ uri: 'http://192.168.0.143:3031' + item.imagen }}
+                              source={{ uri: 'http://10.0.6.128:3031' + item.imagen }}
                             />
                             <Text style={styles.statValue}>{item.nombre} {item.apellido}, {item.posicion}</Text>
                     </View>

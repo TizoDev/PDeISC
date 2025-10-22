@@ -179,7 +179,7 @@ async function addUsuario(email, password, isGoogleUser)
     }
 }
 
-async function addJugador(email, imagen, nombre, apellido, posicion)
+async function addJugador(email, imagen, nombre, apellido, posicion, equipo)
 {
     let db;
     try
@@ -187,8 +187,8 @@ async function addJugador(email, imagen, nombre, apellido, posicion)
         db = await connectBD();
         if(!db) return;
 
-        let sql = 'INSERT INTO jugadores (nombre, apellido, posicion, imagen, goles) VALUES (?,?,?,?,?)'
-        const [result] = await db.execute(sql, [nombre, apellido, posicion, imagen, 0]);
+        let sql = 'INSERT INTO jugadores (nombre, apellido, posicion, imagen, goles, equipo) VALUES (?,?,?,?,?,?)'
+        const [result] = await db.execute(sql, [nombre, apellido, posicion, imagen, 0, Number(equipo)]);
         let id = result.insertId;
 
         sql = 'UPDATE usuarios SET tipo=?, id_tabla=? WHERE email=?'
@@ -645,7 +645,7 @@ app.post('/addUsuario', express.json(), async function(req,res){
 
 //Metodos para que el usuario pueda interactuar con la base de datos
 app.post('/addJugador', upload.none(), async function(req,res){
-    const { email, image, nombre, apellido, posicion } = req.body; //Valores del usuario
+    const { email, image, nombre, apellido, posicion, equipo } = req.body; //Valores del usuario
 
     const base64Data = image.replace(/^data:image\/(png|jpeg|jpg|gif);base64,/, '');
     const imageBuffer = Buffer.from(base64Data, 'base64');
@@ -659,7 +659,7 @@ app.post('/addJugador', upload.none(), async function(req,res){
     });
     imag = imag.replace('./', '/');
     
-    await addJugador(email, imag, nombre, apellido, posicion)
+    await addJugador(email, imag, nombre, apellido, posicion, equipo)
     .then(async result => {
         res.json(result);
     })

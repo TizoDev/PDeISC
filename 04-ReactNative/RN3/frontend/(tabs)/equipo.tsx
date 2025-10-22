@@ -67,10 +67,11 @@ export default function Equipo()
         formData.append('nombre', nombre);
         formData.append('email', await SecureStore.getItemAsync('email') || '');
 
-        let respuesta = await fetch('http://192.168.0.143:3031/addEquipo', {
+        let respuesta = await fetch('http://10.0.6.128:3031/addEquipo', {
             method: 'POST',
             body: formData,
         });
+        router.push("/");
     }
 
     return (
