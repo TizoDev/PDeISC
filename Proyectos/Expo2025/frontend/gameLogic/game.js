@@ -28,11 +28,24 @@ let stick = { x: joystick.x, y: joystick.y };
 
 let isMobile;
 
+let vidamax = 10;
+let vidaactual = 10;
+let healthbarwidth = 200;
+let healthbardheight = 20;
+let inmunitytime = 0;
+let inmunity = 5;
+
+let puntuacion = 0;
+
 export function start(w, h, mobile)
 {
     width = w;
     height = h;
     isMobile = mobile;
+
+    puntuacion = 0;
+    vidamax = 10;
+    vidaactual = 10;
 
     socket = io("http://192.168.0.92:3001");
 
@@ -70,12 +83,26 @@ export function start(w, h, mobile)
       let p = balas.findIndex((pro) => pro.id === id);
       balas.splice(p, 1);
     });
+
+    socket.on("damage", ({ damage, player }) => {
+        if(inmunitytime >= inmunity)
+        {
+            vidaactual -= damage;
+            inmunitytime = 0;
+        }
+        if(vidaactual <= 0) socket.emit("addkill", { player: player });
+    })
+
+    socket.on("addscore", ({ score }) => {
+        puntuacion+=score;
+    })
 }
 
 export function update()
 {
     socket.emit("playermove", { sx: sx * playerSpeed, sy: sy * playerSpeed });
     disparoTime++;
+    inmunitytime++;
     if(disparando) disparar();
 
     let returnjugadores = [];
@@ -88,34 +115,73 @@ export function update()
     balas.forEach(element => {
         if(element)
         {
-          //if(element.player != token) if(element.colisiona(playerObject)) socket.emit("proyectildelete", { id: element.id });
-
-          element.move(element.direction[0], element.direction[1]);
+          //element.move(element.direction[0], element.direction[1]);
           returnbalas.push(element.update());
         }
     });
 
-    const joystick = isMobile ? drawJoystick() : {basex: 0,
+    const joystick = isMobile ? drawJoystick() : {
+      basex: 0,
       basey: 0,
       radius: 0,
       stickx: 0,
-      sticky: 0,};
+      sticky: 0,
+    };
+    const healthbar = drawHealthbar() || {
+        width: 0,
+        height: 0,
+        x: 0,
+        y: 0,
+        color: 'white',
+    }
     return {
+        muerto: vidaactual <= 0,
+        puntuacion: puntuacion,
         jugadores: returnjugadores,
         balas: returnbalas,
-        joystick: joystick
+        joystick: joystick,
+        healthbar: healthbar,
     }
     
 }
 
+function drawHealthbar()
+{
+    let dif = vidaactual/vidamax;
+    return {
+        width: (dif >= 0 ? dif*healthbarwidth : 0) ,
+        height: healthbardheight,
+        x: 40,
+        y: 20,
+        color: (dif >= 0.7 ? 'rgba(40,230,70,0.8)' : dif >= 0.4 ? 'rgba(255, 217, 0, 0.8)' : 'rgba(182, 0, 0, 0.8)')
+    };
+}
+
+const pressedKeys = new Set();
 export function teclas(key, pressed) 
 {
-    if(key === "ArrowRight") sx = pressed ? 1 : 0;
-    if(key === "ArrowLeft") sx = pressed ? -1 : 0;
-    if(key === "ArrowDown") sy = pressed ? 1 : 0;
-    if(key === "ArrowUp") sy = pressed ? -1 : 0;
+    if(pressed) pressedKeys.add(key);
+    else pressedKeys.delete(key);
 
-    if(key === ' ') disparar();
+    if(pressedKeys.has("ArrowRight")) sx = 1;
+    else if(pressedKeys.has("ArrowLeft")) sx = -1;
+    else sx = 0;
+
+    if(pressedKeys.has("ArrowDown")) sy = 1;
+    else if(pressedKeys.has("ArrowUp")) sy = -1;
+    else sy = 0;
+
+    const length = Math.sqrt(sx * sx + sy * sy);
+    if(length !== 0) 
+    {
+        sx /= length;
+        sy /= length;
+    }
+
+    if(key === ' ')
+    {
+        disparar();
+    }
 }
 
 function disparar()

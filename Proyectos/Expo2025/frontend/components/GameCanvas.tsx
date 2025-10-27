@@ -1,16 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Platform, View, PanResponder } from "react-native";
+import { Platform, View, Text, Pressable } from "react-native";
 import Controls from "./Controls";
+import { useRouter } from 'expo-router';
 import { start, teclas, handleTouchStart, handleTouchMove, handleTouchEnd, update, disconnect } from '@/gameLogic/game';
-import { Canvas, Circle, Rect, Paint, Group, } from '@shopify/react-native-skia';
+import { Canvas, Circle, Rect, Paint, Group, center } from '@shopify/react-native-skia';
 
-export default function GameCanvas() 
+export default function GameCanvas({ onGameOver, saveScore }:{ onGameOver:() => void, saveScore: (score : number) => void}) 
 {
   const canvaswidth = 900;
   const canvasheight = 400;
   const webCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const [gameValues, setGameValues] = useState<{
+    muerto: boolean;
+    puntuacion: number;
     jugadores: any[];
     balas: any[];
     joystick: {
@@ -20,7 +23,16 @@ export default function GameCanvas()
       stickx: any;
       sticky: any;
     };
+    healthbar: {
+      width: any;
+      height: any;
+      x: any;
+      y: any;
+      color: any;
+    };
   }>({
+    muerto: false,
+    puntuacion: 0,
     jugadores: [],
     balas: [],
     joystick: {
@@ -30,6 +42,13 @@ export default function GameCanvas()
       stickx: 0,
       sticky: 0,
     },
+    healthbar: {
+      width: 0,
+      height: 0,
+      x: 0,
+      y: 0,
+      color: 'white',
+    }
   });
 
   useEffect(() => {
@@ -44,6 +63,13 @@ export default function GameCanvas()
     const interval = setInterval(() => {
       let newValues = update();
       setGameValues(newValues);
+
+      if(newValues.muerto)
+      {
+        saveScore(newValues.puntuacion);
+        clearInterval(interval);
+        disconnect();
+      }
 
       if(Platform.OS === "web" && webCanvasRef.current) 
       {
@@ -69,31 +95,60 @@ export default function GameCanvas()
           ctx.fillRect(-bala.width/2, -bala.height/2, bala.width, bala.height);
           ctx.restore();
         })
+
+        if(ctx != null)
+        {
+          ctx.fillStyle = newValues.healthbar.color;
+          ctx.fillRect(newValues.healthbar.x, newValues.healthbar.y, newValues.healthbar.width, newValues.healthbar.height);
+        }
       }
     }, 50);
 
     return () => {
+      saveScore(gameValues.puntuacion);
       clearInterval(interval);
       disconnect();
     };
   }, []);
 
+  function deathScreen()
+  {
+    const router = useRouter();
+    return(
+      <View style={{position: "absolute"}}>
+        <Text style={{color: 'white', textAlign: 'center'}}>Te moriste jajaja nuv</Text>
+        <Text style={{color: 'white', textAlign: 'center'}}>Puntuacion: {gameValues.puntuacion}</Text>
+        <Pressable onPress={onGameOver}>
+          <Text style={{color: 'white', textAlign: 'center'}}>Jugar de Nuevo</Text>
+        </Pressable>
+        <Pressable onPress={() => {
+          router.push("/");
+        }}>
+          <Text style={{color: 'white', textAlign: 'center'}}>Ir al Inicio</Text>
+        </Pressable>
+      </View> 
+    )
+  }
+
   if (Platform.OS === "web") 
   {
     return (
-      <>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <canvas
           ref={webCanvasRef}
           style={{backgroundColor: "#000000ff" }}
         />
         <Controls onKey={(key, pressed) => teclas(key, pressed)} />
-      </>
+        {gameValues.muerto ? 
+          deathScreen()
+      : null}
+      </View>
     );
   }
 
   return (
     <View
-      style={{ flex: 1 }}
+      style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
       onTouchStart={(e) => {
         for(const touch of e.nativeEvent.touches) 
         {
@@ -166,8 +221,16 @@ export default function GameCanvas()
             color="rgba(255,255,255,0.6)"
           />
         </>
+        <Group>
+          <Rect width={gameValues.healthbar.width} height={gameValues.healthbar.height} color={gameValues.healthbar.color} x={gameValues.healthbar.x} y={gameValues.healthbar.y}>
+            <Paint color={gameValues.healthbar.color} />
+          </Rect>
+        </Group>
       </Canvas>
       <Controls onKey={(key, pressed) => teclas(key, pressed)} />
+      {gameValues.muerto ? 
+        deathScreen()
+      : null}
     </View>
   );
 }

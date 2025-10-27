@@ -49,6 +49,7 @@ export default function Profile()
         .then(response => response.json())
         .then(data => {
             setNombre(data[0].nombre);
+            setNewNombre(data[0].nombre);
             formdata.append('nombre', data[0].nombre); 
             formdata.append('email', savedMail); 
         });
@@ -116,7 +117,7 @@ export default function Profile()
                         <TextInput
                             placeholder="Nombre"
                             onChangeText={setNewNombre}
-                            value={nombre}
+                            value={newnombre}
                         />
                         <Pressable onPress={() => {
                             let form = new FormData();

@@ -75,10 +75,10 @@ async function getUserData(email)
 
 async function addScore(email, newScore)
 {
-  const sql = 'SELECT id FROM usuarios WHERE email=?';
+  let sql = 'SELECT id FROM usuarios WHERE email=?';
   const [result] = await database.execute(sql, [email]);
-  let id = result[0].id;
 
+  console.log(id, email, newScore);
   sql = 'INSERT INTO highscores (score, jugador) VALUES (?,?)'
   await database.execute(sql, [newScore, id]);
   return 0;
@@ -104,7 +104,7 @@ async function editUser(mail, password, oldmail, oldpassword, isGoogleUser, nomb
   }
   else
   {
-    sql = 'UPDATE usuarios SET nombre=? WHERE email=?';
+    let sql = 'UPDATE usuarios SET nombre=? WHERE email=?';
     await database.execute(sql, [nombre, oldmail]);
     return 0;
   }
@@ -156,6 +156,7 @@ const interval = setInterval(() => {
         if(player.token !== bullet.player) 
         {
           delete world.bullets[id];
+          io.to(player.token).emit("damage", { damage: 1, player: bullet.player });
           io.emit("proupdatedel", { id });
         }
         break;
@@ -209,9 +210,13 @@ io.on("connection", (socket) => {
       world.bullets[id] = pro;
     });
 
+    socket.on("addkill", ({ player }) => {
+      io.to(player).emit("addscore", { score: 50 });
+    });
+
     socket.on("disconnect", () => {
       console.log("Cliente desconectado:", socket.id);
-      world.players[socket.id] = null;
+      delete world.players[socket.id];
     });
 });
 
