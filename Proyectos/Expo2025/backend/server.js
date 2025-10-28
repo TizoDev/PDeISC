@@ -134,6 +134,7 @@ const world = {
   bullets: {},
 };
 let proyectileSpeed = 8;
+let maxPlayersInServer = 25;
 
 const interval = setInterval(() => {
   const now = Date.now();
@@ -179,21 +180,28 @@ const interval = setInterval(() => {
 
 io.on("connection", (socket) => {
     console.log("Cliente conectado:", socket.id);
-    if(!world.players[socket.id]) world.players[socket.id] = {
-      x:50, 
-      y:50, 
-      color:"#" + Math.floor(Math.random() * 16777215).toString(16), 
-      token: socket.id, 
-      direction: [0, 0]
-    };
+    
+    socket.on("connectplayer", () => {
+      if(Object.keys(world.players).length >= maxPlayersInServer) io.to(socket.id).emit("rejectedconnection", {});
+      else if(!world.players[socket.id]) world.players[socket.id] = {
+        x:50, 
+        y:50, 
+        color:"#" + Math.floor(Math.random() * 16777215).toString(16), 
+        token: socket.id, 
+        direction: [0, 0]
+      };
 
-    let response = socket.id;
-    io.to(socket.id).emit("gettoken", { response });
+      let response = socket.id;
+      io.to(socket.id).emit("gettoken", { response });
+    })
 
     socket.on("playermove", ({ sx, sy }) => {
+      if(world.players[socket.id])
+      {
         world.players[socket.id].x += sx;
         world.players[socket.id].y += sy;
         if(sx != 0 || sy != 0) world.players[socket.id].direction = [sx, sy];
+      }
     });
     
     socket.on("proyectilspawn", ({ x, y, dx, dy }) => {

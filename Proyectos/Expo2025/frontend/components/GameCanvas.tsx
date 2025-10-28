@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router';
 import { start, teclas, handleTouchStart, handleTouchMove, handleTouchEnd, update, disconnect } from '@/gameLogic/game';
 import { Canvas, Circle, Rect, Paint, Group, center } from '@shopify/react-native-skia';
 
-export default function GameCanvas({ onGameOver, saveScore }:{ onGameOver:() => void, saveScore: (score : number) => void}) 
+export default function GameCanvas({ onGameOver, saveScore, spectator }:{ onGameOver:() => void, saveScore: (score : number) => void, spectator : boolean}) 
 {
   const canvaswidth = 900;
   const canvasheight = 400;
@@ -52,7 +52,7 @@ export default function GameCanvas({ onGameOver, saveScore }:{ onGameOver:() => 
   });
 
   useEffect(() => {
-    start(canvaswidth, canvasheight, !(Platform.OS === "web"));
+    start(spectator, !(Platform.OS === "web"));
     if(Platform.OS === "web" && webCanvasRef.current) 
     {
       const canvas = webCanvasRef.current;
@@ -122,7 +122,7 @@ export default function GameCanvas({ onGameOver, saveScore }:{ onGameOver:() => 
           <Text style={{color: 'white', textAlign: 'center'}}>Jugar de Nuevo</Text>
         </Pressable>
         <Pressable onPress={() => {
-          router.push("/");
+          router.replace("/");
         }}>
           <Text style={{color: 'white', textAlign: 'center'}}>Ir al Inicio</Text>
         </Pressable>

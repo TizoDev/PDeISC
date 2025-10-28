@@ -35,12 +35,12 @@ export default function GamePage()
 
   function gameOver()
   {
-    router.push("/gamepage");
+    router.replace("/gamepage");
   }
 
   return (
     <View style={styles.container}>
-      <GameCanvas onGameOver={gameOver} saveScore={guardarScore}/>
+      <GameCanvas onGameOver={gameOver} saveScore={guardarScore} spectator={false}/>
     </View>
   );
 }

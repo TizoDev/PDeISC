@@ -3,12 +3,10 @@ import { objeto, proyectil, nave } from './objeto';
 
 let socket = null;
 let token = '';
+let spectator = true;
 
 let sx = 0;
 let sy = 0;
-
-let width = 300;
-let height = 300;
 
 let playerSpeed = 4;
 
@@ -37,10 +35,9 @@ let inmunity = 5;
 
 let puntuacion = 0;
 
-export function start(w, h, mobile)
+export function start(spect, mobile)
 {
-    width = w;
-    height = h;
+    spectator = spect;
     isMobile = mobile;
 
     puntuacion = 0;
@@ -48,6 +45,12 @@ export function start(w, h, mobile)
     vidaactual = 10;
 
     socket = io("http://192.168.0.92:3001");
+    
+    if(!spectator) socket.emit("connectplayer", {});
+
+    socket.on("rejectedconnection", () => {
+        spectator = true;
+    });
 
     socket.on("gettoken", ({response}) => {
       token = response;
@@ -100,10 +103,13 @@ export function start(w, h, mobile)
 
 export function update()
 {
-    socket.emit("playermove", { sx: sx * playerSpeed, sy: sy * playerSpeed });
-    disparoTime++;
-    inmunitytime++;
-    if(disparando) disparar();
+    if(!spectator)
+    {
+        socket.emit("playermove", { sx: sx * playerSpeed, sy: sy * playerSpeed });
+        disparoTime++;
+        inmunitytime++;
+        if(disparando) disparar();
+    }
 
     let returnjugadores = [];
     let returnbalas = [];
@@ -120,20 +126,20 @@ export function update()
         }
     });
 
-    const joystick = isMobile ? drawJoystick() : {
+    const joystick = isMobile && !spectator ? drawJoystick() : {
       basex: 0,
       basey: 0,
       radius: 0,
       stickx: 0,
       sticky: 0,
     };
-    const healthbar = drawHealthbar() || {
+    const healthbar = !spectator ? drawHealthbar() : {
         width: 0,
         height: 0,
         x: 0,
         y: 0,
         color: 'white',
-    }
+    };
     return {
         muerto: vidaactual <= 0,
         puntuacion: puntuacion,
@@ -180,7 +186,7 @@ export function teclas(key, pressed)
 
     if(key === ' ')
     {
-        disparar();
+        if(!spectator) disparar();
     }
 }
 
